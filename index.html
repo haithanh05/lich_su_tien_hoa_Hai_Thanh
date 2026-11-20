@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lịch Sử Tiến Hóa Của Hải Thành (2007 - 2026)</title>
+  <meta name="description" content="Biên niên sử tiến hóa vượt bậc của sinh vật Hải Thành từ lúc còn là tân thủ Lv.02 ngây ngô đến chiến thần Lv.21 cày code xuyên màn đêm.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="museum-body">
+
+  <!-- BACKGROUND AMBIENT GLOW -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- STICKY TOP NAVIGATION BAR (Visible on scroll) -->
+  <header id="sticky-header" class="sticky-nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-icon">🧬</span>
+        <span class="brand-title">LỊCH SỬ TIẾN HÓA HẢI THÀNH</span>
+      </a>
+
+      <!-- Quick Chapter Dropdown / Nav -->
+      <nav class="nav-chapters" id="nav-chapters-bar" aria-label="Điều hướng giai đoạn">
+        <!-- Rendered dynamically -->
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Switcher Dropdown (Nâng cấp Theme Switcher) -->
+        <div class="theme-selector-dropdown" id="theme-selector-dropdown">
+          <button id="theme-toggle-btn" class="nav-btn nav-btn-theme" title="Đổi màu giao diện" aria-label="Đổi màu giao diện" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" id="theme-btn-icon">🌑</span>
+            <span class="btn-text" id="theme-btn-text">Giao diện</span>
+            <span class="theme-arrow">▾</span>
+          </button>
+          <div class="theme-dropdown-menu" id="theme-dropdown-menu" role="menu">
+            <button class="theme-option-btn active" data-theme="obsidian" role="menuitem">
+              <span class="theme-dot dot-obsidian"></span>
+              <span class="theme-name">Đêm Obsidian</span>
+              <span class="theme-badge">Mặc định</span>
+            </button>
+            <button class="theme-option-btn" data-theme="sepia" role="menuitem">
+              <span class="theme-dot dot-sepia"></span>
+              <span class="theme-name">Giấy Cũ Hoài Niệm</span>
+            </button>
+            <button class="theme-option-btn" data-theme="midnight" role="menuitem">
+              <span class="theme-dot dot-midnight"></span>
+              <span class="theme-name">Xanh Đêm Vũ Trụ</span>
+            </button>
+            <button class="theme-option-btn" data-theme="daylight" role="menuitem">
+              <span class="theme-dot dot-daylight"></span>
+              <span class="theme-name">Sáng Tối Giản</span>
+            </button>
+          </div>
+        </div>
+
+        <a href="#ticket-station" class="nav-btn nav-btn-ticket" title="Quầy in vé tham quan lưu niệm" aria-label="In vé">
+          <span class="btn-icon">🎟️</span>
+          <span class="btn-text">In vé</span>
+        </a>
+        <button id="btn-nav-game" class="nav-btn nav-btn-game" title="Mini-game Đoán năm" aria-label="Chơi game đoán năm">
+          <span class="btn-icon">🎮</span>
+          <span class="btn-text">Đoán năm</span>
+        </button>
+        <button id="global-audio-toggle" class="nav-btn playing" title="Tạm dừng âm thanh toàn trang" aria-label="Âm thanh">
+          <span class="btn-icon">🎵</span>
+          <span class="btn-text">Nhạc nền</span>
+        </button>
+      </div>
+    </div>
+    <div class="scroll-progress-line" id="scroll-progress"></div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- HERO SECTION: SẢNH CHÍNH (TRANG TỔNG)                   -->
+  <!-- ======================================================== -->
+  <section id="hero" class="hero-section">
+    <div class="hero-container">
+      
+      <!-- Top Museum Badge -->
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">BIÊN NIÊN SỬ TIẾN HÓA HẢI THÀNH &bull; TỪ LV.02 ĐẾN LV.21</span>
+      </div>
+
+      <div class="hero-main-grid">
+        <!-- Left: Text Content -->
+        <div class="hero-text-col">
+          <h1 class="hero-title" id="hero-title">
+            Lịch Sử <span class="text-gradient">Tiến Hóa Của Hải Thành</span>
+          </h1>
+          <p class="hero-intro" id="hero-intro">
+            Biên niên sử tiến hóa vượt bậc của sinh vật Hải Thành từ lúc còn là tân thủ Lv.02 ngây ngô đến chiến thần Lv.21 cày code xuyên màn đêm. Mời bạn bước vào hành trình xem anh ấy đã "tiến hóa" (và lag) ra sao!
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="hero-cta-group">
+            <a href="#stage-luc-nho" class="btn btn-primary cta-btn" id="btn-start-journey">
+              <span class="btn-sparkle">✨</span>
+              <span>Bắt đầu hành trình</span>
+              <span class="btn-arrow">↓</span>
+            </a>
+            <button class="btn btn-cinema" id="btn-hero-cinema">
+              <span>🎬 Chiếu phim toàn hành trình</span>
+            </button>
+            <button class="btn btn-game" id="btn-hero-game">
+              <span>🎮 Thử thách đoán năm</span>
+            </button>
+            <a href="#ticket-station" class="btn btn-ticket" id="btn-hero-ticket">
+              <span>🎟️ In vé lưu niệm</span>
+            </a>
+            <button class="btn btn-glass" id="btn-open-genesis-info">
+              <span>📖 Lời tựa khởi nguyên</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Stats Bar -->
+          <div class="hero-stats-bar" id="hero-stats">
+            <div class="stat-card">
+              <div class="stat-number" id="stat-stages">7</div>
+              <div class="stat-label">Giai đoạn RPG</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="stat-images">230+</div>
+              <div class="stat-label">Bức ảnh lưu giữ</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="stat-years">2007 - 2026</div>
+              <div class="stat-label">Năm trải nghiệm</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="stat-highlights">10</div>
+              <div class="stat-label">Điểm nhấn nổi bật</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Flip Card for Genesis Image -->
+        <div class="hero-visual-col">
+          <div class="genesis-card-wrapper">
+            <div class="genesis-flip-card" id="genesis-card" tabindex="0" role="button" aria-label="Bấm để lật ảnh khởi nguyên và đọc lời tựa">
+              
+              <!-- Front Side -->
+              <div class="card-face card-front">
+                <div class="card-frame">
+                  <div class="card-photo-box">
+                    <img id="genesis-img" 
+                         src="images/khoi-nguyen.webp" 
+                         alt="Ảnh khởi nguyên: Khởi đầu của mọi hành trình" 
+                         loading="lazy" 
+                         onerror="this.onerror=null; this.src='images/Lúc nhỏ/IMG_0025_Original.JPG';">
+                    <div class="genesis-overlay">
+                      <span class="genesis-tag">✦ Ảnh Khởi Nguyên ✦</span>
+                    </div>
+                  </div>
+                  <div class="card-caption">
+                    <h3 class="card-title" id="genesis-title">Khởi đầu của mọi hành trình</h3>
+                    <p class="card-hint">🔄 Bấm vào ảnh để lật xem lời tựa bí mật</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Back Side (Lời tựa khi bấm vào ảnh) -->
+              <div class="card-face card-back">
+                <div class="card-back-content">
+                  <div class="wax-seal">📜</div>
+                  <h4 class="back-subtitle">LỜI TỰA BẢO TÀNG</h4>
+                  <blockquote class="back-quote" id="genesis-description">
+                    "Mỗi bức ảnh, mỗi dòng ghi chú ở đây đều là một mảnh ký ức thật trên hành trình lớn lên từ thuở nhỏ đến năm 2026. Mời bạn bước vào chuyến tàu thời gian của riêng mình."
+                  </blockquote>
+                  <div class="back-signature">
+                    <div class="sig-line"></div>
+                    <span class="sig-name">Người Lữ Hành Thời Gian</span>
+                  </div>
+                  <button class="back-flip-btn" id="btn-flip-back">← Quay lại mặt trước</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Chapter Select Bar -->
+      <div class="chapter-select-bar">
+        <div class="chapter-select-header">
+          <span class="chapter-select-title">CHỌN NHANH CHƯƠNG KỶ NIỆM (CHAPTER SELECT)</span>
+          <span class="chapter-select-desc">Hành trình nâng cấp nhân vật qua từng mốc thời gian</span>
+        </div>
+        <div class="chapter-chips-row" id="hero-chapter-chips">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- MỤC 1: BẢNG HUY HIỆU THÀNH TỰU (RPG ACHIEVEMENTS)         -->
+  <!-- ======================================================== -->
+  <section class="achievements-section" id="rpg-achievements">
+    <div class="container">
+      <div class="achievements-header">
+        <div class="achievements-badge-tag">HỆ THỐNG THÀNH TỰU TIẾN HÓA</div>
+        <h2 class="achievements-title">BẢNG HUY HIỆU CỘT MỐC (RPG ACHIEVEMENTS)</h2>
+        <p class="achievements-subtitle">Ghi nhận 6 mốc tiến hóa quan trọng của Hải Thành từ lúc tập đi đến tuổi 21. Bấm vào huy hiệu để di chuyển nhanh và chiếu rọi giai đoạn đó!</p>
+      </div>
+
+      <div class="achievements-grid">
+        <!-- 1. Tân Thủ Khám Phá -->
+        <div class="achievement-card unlocked" data-target-stage="stage-luc-nho" tabindex="0" role="button" aria-label="Huy hiệu Tân Thủ Khám Phá: Tuổi thơ 2007-2017">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">🍼</span>
+            <span class="achievement-status-badge">Đã mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.02 – Lv.12 &bull; 2007–2017</div>
+            <h3 class="achievement-name">Tân Thủ Khám Phá</h3>
+            <p class="achievement-desc">Mở khóa ký ức tuổi thơ hồn nhiên, những bước chân đầu đời trên bản đồ thế giới.</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">📍 Đến ký ức ➔</span>
+          </div>
+        </div>
+
+        <!-- 2. Cú Đêm Cấp 3 -->
+        <div class="achievement-card unlocked" data-target-stage="stage-2021" tabindex="0" role="button" aria-label="Huy hiệu Cú Đêm Cấp 3: Giai đoạn 2021-2023">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">🌙</span>
+            <span class="achievement-status-badge">Đã mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.16 – Lv.18 &bull; 2021–2023</div>
+            <h3 class="achievement-name">Cú Đêm Cấp 3</h3>
+            <p class="achievement-desc">Sống sót qua những đêm cày bài căng thẳng, thanh xuân rực lửa cùng tập thể 12A7.</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">📍 Đến ký ức ➔</span>
+          </div>
+        </div>
+
+        <!-- 3. Tân Binh Trường Đời -->
+        <div class="achievement-card unlocked" data-target-stage="stage-2024" tabindex="0" role="button" aria-label="Huy hiệu Tân Binh Trường Đời: Giai đoạn 2024">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">💼</span>
+            <span class="achievement-status-badge">Đã mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.19 &bull; 2024</div>
+            <h3 class="achievement-name">Tân Binh Trường Đời</h3>
+            <p class="achievement-desc">Mở khóa kỹ năng tự lập ở tuổi 19, dấn thân vào đời thực với tinh thần ham học hỏi.</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">📍 Đến ký ức ➔</span>
+          </div>
+        </div>
+
+        <!-- 4. Bản Lĩnh Đầu 2 -->
+        <div class="achievement-card unlocked" data-target-stage="stage-2025" tabindex="0" role="button" aria-label="Huy hiệu Bản Lĩnh Đầu 2: Giai đoạn 2025">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">🔥</span>
+            <span class="achievement-status-badge">Đã mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.20 &bull; 2025</div>
+            <h3 class="achievement-name">Bản Lĩnh Đầu 2</h3>
+            <p class="achievement-desc">Chính thức chạm ngõ tuổi 20, định hình bản lĩnh vững vàng và con đường phía trước.</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">📍 Đến ký ức ➔</span>
+          </div>
+        </div>
+
+        <!-- 5. Kiến Trúc Sư Tuổi 21 -->
+        <div class="achievement-card unlocked" data-target-stage="stage-2026" tabindex="0" role="button" aria-label="Huy hiệu Kiến Trúc Sư Tuổi 21: Giai đoạn 2026">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">💻</span>
+            <span class="achievement-status-badge">Đã mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.21 &bull; 2026</div>
+            <h3 class="achievement-name">Kiến Trúc Sư Tuổi 21</h3>
+            <p class="achievement-desc">Tự tay dựng nên bảo tàng lịch sử tiến hóa cho riêng mình, đúc kết mọi bài học và vươn xa.</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">📍 Đến ký ức ➔</span>
+          </div>
+        </div>
+
+        <!-- 6. Bí Ẩn Tuổi 22 -->
+        <div class="achievement-card locked" data-locked="true" tabindex="0" role="button" aria-label="Huy hiệu Bí Ẩn Tuổi 22: Giai đoạn 2027 (Đang khóa)">
+          <div class="achievement-icon-wrap">
+            <span class="achievement-icon">🔒</span>
+            <span class="achievement-status-badge locked-badge">Chưa mở khóa</span>
+          </div>
+          <div class="achievement-body">
+            <div class="achievement-level-tag">Lv.22 &bull; 2027</div>
+            <h3 class="achievement-name">Bí Ẩn Tuổi 22</h3>
+            <p class="achievement-desc">Chương tiếp theo của vận mệnh đang chờ đón. Hãy đón chờ bước nhảy vọt ở tuổi 22!</p>
+          </div>
+          <div class="achievement-footer">
+            <span class="achievement-action-hint">⏳ Cần đạt Lv.22 (2027)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- GLOBAL FILTER BAR                                        -->
+  <!-- ======================================================== -->
+  <section class="global-filter-section">
+    <div class="container filter-container">
+      <div class="filter-wrapper">
+        <span class="filter-label">Bộ lọc hiển thị:</span>
+        <div class="filter-tabs" role="tablist">
+          <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
+            <span class="tab-icon">🌟</span>
+            <span>Tất cả</span>
+            <span class="tab-badge" id="filter-count-all">0</span>
+          </button>
+          <button class="filter-tab" data-filter="photos" role="tab" aria-selected="false">
+            <span class="tab-icon">📸</span>
+            <span>Khoảnh khắc (Có ảnh)</span>
+            <span class="tab-badge" id="filter-count-photos">0</span>
+          </button>
+          <button class="filter-tab" data-filter="quotes" role="tab" aria-selected="false">
+            <span class="tab-icon">✍️</span>
+            <span>Tâm sự (Chỉ chữ)</span>
+            <span class="tab-badge" id="filter-count-quotes">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- MAIN STAGES CONTAINER                                    -->
+  <!-- ======================================================== -->
+  <main id="stages-container" class="stages-main">
+    <!-- Stages are rendered dynamically from window.MEMORIES_DATA -->
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- FILMSTRIP GRID MODAL (Cuộn phim lưu trữ toàn bộ)         -->
+  <!-- ======================================================== -->
+  <div id="filmstrip-modal" class="modal filmstrip-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-stage-title">
+    <div class="modal-backdrop" id="modal-filmstrip-backdrop"></div>
+    <div class="modal-dialog filmstrip-dialog">
+      
+      <!-- Film Perforation Border Top -->
+      <div class="film-holes film-holes-top">
+        <div class="holes-track"></div>
+      </div>
+
+      <div class="filmstrip-modal-header">
+        <div class="modal-title-group">
+          <span class="modal-tag">🎞️ CUỘN PHIM LƯU TRỮ HOÀN CHỈNH</span>
+          <h2 class="modal-stage-title" id="modal-stage-title">Giai đoạn...</h2>
+          <p class="modal-stage-subtitle" id="modal-stage-subtitle">Kho lưu trữ gồm 0 khoảnh khắc</p>
+        </div>
+        <button class="modal-close-btn" id="btn-close-filmstrip" aria-label="Đóng cuộn phim">✕</button>
+      </div>
+
+      <!-- Month Filter Bar inside Modal -->
+      <div class="modal-month-filter">
+        <div class="month-filter-label">Lọc theo tháng:</div>
+        <div class="month-filter-chips" id="modal-month-chips">
+          <!-- Dynamic month chips (Tất cả, T1 -> T12, Tuổi thơ / Khác) -->
+        </div>
+      </div>
+
+      <!-- Filmstrip Grid Body -->
+      <div class="filmstrip-grid-body">
+        <div class="filmstrip-grid" id="modal-filmstrip-grid">
+          <!-- Dynamic film items (#01, #02...) -->
+        </div>
+        <div class="empty-filter-state" id="modal-empty-state" style="display: none;">
+          <p>Không có khoảnh khắc nào trong khoảng thời gian này.</p>
+        </div>
+      </div>
+
+      <!-- Film Perforation Border Bottom -->
+      <div class="film-holes film-holes-bottom">
+        <div class="holes-track"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- FULLSCREEN LIGHTBOX MODAL                                -->
+  <!-- ======================================================== -->
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    
+    <div class="lightbox-container">
+      <!-- Lightbox Header / Controls -->
+      <div class="lightbox-header">
+        <div class="lightbox-counter" id="lightbox-counter">1 / 1</div>
+        <div class="lightbox-actions">
+          <button class="lightbox-btn" id="lightbox-btn-zoom" title="Thu phóng" aria-label="Thu phóng">🔍</button>
+          <button class="lightbox-btn" id="lightbox-btn-close" title="Đóng (Esc)" aria-label="Đóng">✕</button>
+        </div>
+      </div>
+
+      <!-- Main Image View -->
+      <div class="lightbox-stage">
+        <button class="lightbox-nav lightbox-prev" id="lightbox-btn-prev" aria-label="Ảnh trước">‹</button>
+        
+        <div class="lightbox-img-wrapper" id="lightbox-img-wrapper">
+          <img id="lightbox-img" src="" alt="Kỷ niệm phóng to">
+        </div>
+
+        <button class="lightbox-nav lightbox-next" id="lightbox-btn-next" aria-label="Ảnh sau">›</button>
+      </div>
+
+      <!-- Lightbox Caption -->
+      <div class="lightbox-caption-box">
+        <div class="lightbox-badge" id="lightbox-tag">Kỷ niệm</div>
+        <h3 class="lightbox-title" id="lightbox-title">Tiêu đề kỷ niệm</h3>
+        <p class="lightbox-desc" id="lightbox-desc">Ghi chú kỷ niệm...</p>
+        <div class="lightbox-time" id="lightbox-time">Thời gian</div>
+      </div>
+
+      <!-- Thumbnails Strip (if multi-image) -->
+      <div class="lightbox-thumbs-bar" id="lightbox-thumbs">
+        <!-- Thumbnails -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MINI-GAME MODAL: THỬ THÁCH ĐOÁN NĂM                      -->
+  <!-- ======================================================== -->
+  <div id="game-modal" class="modal game-modal" aria-hidden="true" role="dialog" aria-labelledby="game-modal-title">
+    <div class="modal-backdrop" id="modal-game-backdrop"></div>
+    <div class="modal-dialog game-dialog">
+      
+      <!-- Game Modal Header -->
+      <div class="game-modal-header">
+        <div class="game-title-group">
+          <span class="game-tag-badge">🎮 MINI-GAME TRÍ NHỚ</span>
+          <h2 class="game-modal-title" id="game-modal-title">Thử Thách Đoán Năm</h2>
+        </div>
+        <button class="modal-close-btn" id="btn-close-game" aria-label="Đóng trò chơi">✕</button>
+      </div>
+
+      <!-- Game Status & Progress Bar -->
+      <div class="game-status-bar" id="game-status-bar">
+        <div class="game-status-info">
+          <span class="game-q-counter" id="game-q-counter">Câu 1 / 10</span>
+          <span class="game-score-badge" id="game-score-badge">Điểm: 0</span>
+        </div>
+        <div class="game-progress-track">
+          <div class="game-progress-fill" id="game-progress-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Game Playing Screen -->
+      <div class="game-body" id="game-play-screen">
+        
+        <!-- Secret Photo Box (Strictly no titles, dates, or stage hints) -->
+        <div class="game-photo-box">
+          <div class="game-photo-wrap">
+            <img id="game-current-img" src="" alt="Bức ảnh bí ẩn cần đoán năm" loading="eager">
+          </div>
+          <div class="game-photo-hint">❓ Bức ảnh này được chụp ở giai đoạn / năm nào?</div>
+        </div>
+
+        <!-- 4 Multiple Choice Options (A, B, C, D) -->
+        <div class="game-options-grid" id="game-options-grid">
+          <!-- Dynamically generated buttons -->
+        </div>
+
+        <!-- Reveal Info Card (Shown after an option is selected) -->
+        <div class="game-reveal-card" id="game-reveal-card" style="display: none;">
+          <div class="reveal-header">
+            <span class="reveal-status-icon" id="reveal-status-icon">🎉</span>
+            <span class="reveal-status-text" id="reveal-status-text">Chính xác!</span>
+          </div>
+          <div class="reveal-info-body">
+            <h4 class="reveal-memory-title" id="reveal-memory-title">Tiêu đề ảnh gốc</h4>
+            <div class="reveal-memory-time" id="reveal-memory-time">📅 Thời gian: ...</div>
+            <p class="reveal-memory-desc" id="reveal-memory-desc">Ghi chú gốc...</p>
+          </div>
+          <button class="btn btn-primary game-next-btn" id="btn-game-next">
+            <span>Câu tiếp theo</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Game Result Screen (Shown after 10 questions) -->
+      <div class="game-result-screen" id="game-result-screen" style="display: none;">
+        <div class="result-trophy-box" id="result-trophy-icon">🏆</div>
+        <h3 class="result-title">KẾT QUẢ THỬ THÁCH</h3>
+        <div class="result-score-highlight" id="result-score-highlight">8 / 10</div>
+        
+        <!-- Humorous Memory Evaluation -->
+        <div class="result-badge-pill" id="result-rank-badge">Bậc Thầy Hoài Niệm</div>
+        <p class="result-commentary" id="result-commentary">
+          Bạn nhớ được hầu hết các cột mốc quan trọng trên hành trình lớn lên!
+        </p>
+
+        <div class="result-actions">
+          <button class="btn btn-primary" id="btn-game-replay">
+            <span>🔄 Chơi lại lượt mới</span>
+          </button>
+          <button class="btn btn-glass" id="btn-game-exit">
+            <span>🏛️ Quay lại Bảo Tàng</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- CINEMA MEMORY REEL MODAL (Chiếu Phim Tự Động)            -->
+  <!-- ======================================================== -->
+  <div id="cinema-modal" class="cinema-modal" aria-hidden="true" role="dialog" aria-labelledby="cinema-sub-title">
+    <div class="cinema-backdrop"></div>
+
+    <!-- Story Segmented Progress Bar (Top) -->
+    <div class="cinema-progress-row" id="cinema-progress-row">
+      <!-- Dynamic segments -->
+    </div>
+
+    <!-- Top Cinema Header Controls -->
+    <div class="cinema-top-header">
+      <div class="cinema-title-badge">
+        <span class="cinema-icon-pulse">🎬</span>
+        <span class="cinema-badge-text" id="cinema-badge-mode">CHIẾU PHIM TOÀN HÀNH TRÌNH</span>
+      </div>
+
+      <div class="cinema-controls-group">
+        <button class="cinema-ctrl-btn" id="cinema-btn-pause" title="Tạm dừng / Tiếp tục" aria-label="Tạm dừng">
+          <span id="cinema-pause-icon">⏸</span>
+        </button>
+        <button class="cinema-ctrl-btn" id="cinema-btn-audio" title="Bật / Tắt âm thanh" aria-label="Âm thanh">
+          <span id="cinema-audio-icon">🔊</span>
+        </button>
+        <button class="cinema-ctrl-btn cinema-close-btn" id="cinema-btn-close" title="Thoát rạp chiếu (Esc)" aria-label="Đóng">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Screen Stage -->
+    <div class="cinema-screen" id="cinema-screen">
+      <!-- Click navigation tap zones (Left for prev, Right for next) -->
+      <div class="cinema-tap-zone zone-left" id="cinema-zone-prev" title="Kỷ niệm trước"></div>
+      <div class="cinema-tap-zone zone-right" id="cinema-zone-next" title="Kỷ niệm sau"></div>
+
+      <!-- Arrow Nav Buttons -->
+      <button class="cinema-arrow cinema-arrow-prev" id="cinema-arrow-prev" aria-label="Kỷ niệm trước">‹</button>
+      <button class="cinema-arrow cinema-arrow-next" id="cinema-arrow-next" aria-label="Kỷ niệm sau">›</button>
+
+      <!-- Slides Container -->
+      <div class="cinema-slides-viewport" id="cinema-slides-viewport">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Bottom Cinematic Subtitle Bar -->
+    <div class="cinema-subtitle-bar">
+      <div class="cinema-sub-meta">
+        <span class="cinema-sub-stage" id="cinema-sub-stage">GIAI ĐOẠN...</span>
+        <span class="cinema-sub-divider">&bull;</span>
+        <span class="cinema-sub-time" id="cinema-sub-time">THỜI GIAN...</span>
+      </div>
+      <h2 class="cinema-sub-title" id="cinema-sub-title">Tiêu đề khoảnh khắc</h2>
+      <p class="cinema-sub-desc" id="cinema-sub-desc">Ghi chú...</p>
+    </div>
+
+    <!-- Hidden Dedicated Cinema Audio Element -->
+    <audio id="cinema-audio" preload="auto"></audio>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MỤC 2: HỘP THỜI GIAN GỬI TUỔI 22 (TIME CAPSULE)           -->
+  <!-- ======================================================== -->
+  <section id="time-capsule" class="time-capsule-section">
+    <div class="container capsule-container">
+      
+      <!-- Section Header -->
+      <div class="capsule-section-header">
+        <span class="capsule-badge-tag">⏳ VIÊN NANG KÝ ỨC & VẬN MỆNH</span>
+        <h2 class="capsule-section-title">HỘP THỜI GIAN GỬI TUỔI 22 (TIME CAPSULE)</h2>
+        <p class="capsule-section-desc">
+          Gửi gắm ước mơ, lời nhắn nhủ chân thành hoặc lời tiên tri hài hước đến Hải Thành ở cột mốc Level 22 (năm 2027). Từng viên nang thời gian sẽ được niêm phong an toàn và lưu giữ cho tương lai!
+        </p>
+      </div>
+
+      <!-- Real-time Countdown HUD -->
+      <div class="capsule-countdown-card">
+        <div class="countdown-card-header">
+          <span class="countdown-live-dot"></span>
+          <span class="countdown-header-title">ĐỒNG HỒ ĐẾM NGƯỢC CỘT MỐC LEVEL 22 (NĂM 2027)</span>
+        </div>
+        <div class="countdown-hud-grid">
+          <div class="countdown-hud-item">
+            <div class="countdown-digit" id="countdown-days">000</div>
+            <div class="countdown-label">NGÀY</div>
+          </div>
+          <div class="countdown-hud-sep">:</div>
+          <div class="countdown-hud-item">
+            <div class="countdown-digit" id="countdown-hours">00</div>
+            <div class="countdown-label">GIỜ</div>
+          </div>
+          <div class="countdown-hud-sep">:</div>
+          <div class="countdown-hud-item">
+            <div class="countdown-digit" id="countdown-mins">00</div>
+            <div class="countdown-label">PHÚT</div>
+          </div>
+          <div class="countdown-hud-sep">:</div>
+          <div class="countdown-hud-item">
+            <div class="countdown-digit countdown-pulse" id="countdown-secs">00</div>
+            <div class="countdown-label">GIÂY</div>
+          </div>
+        </div>
+        <div class="countdown-target-info">
+          <span>🎯 Thời khắc mở niêm phong: <strong>00:00:00 &bull; Ngày 01/01/2027</strong></span>
+        </div>
+      </div>
+
+      <!-- Capsule Interaction Grid: Form + List -->
+      <div class="capsule-layout-grid">
+        
+        <!-- Left: Submission Form -->
+        <div class="capsule-form-panel">
+          <div class="capsule-panel-header">
+            <span class="panel-icon">💌</span>
+            <div>
+              <h3 class="panel-title">Tạo Viên Nang Mới</h3>
+              <p class="panel-subtitle">Ghi lại thông điệp của bạn gửi tới tuổi 22</p>
+            </div>
+          </div>
+
+          <form id="capsule-form" class="capsule-form" onsubmit="return false;">
+            <div class="form-group">
+              <label for="capsule-sender" class="form-label">Tên người gửi:</label>
+              <input type="text" id="capsule-sender" class="form-input" placeholder="Tên của bạn hoặc 'Hải Thành (Bản thể hiện tại)'..." maxlength="40">
+            </div>
+
+            <div class="form-group">
+              <label for="capsule-tag" class="form-label">Chủ đề viên nang:</label>
+              <select id="capsule-tag" class="form-select">
+                <option value="goal" selected>🎯 Mục tiêu tuổi 22</option>
+                <option value="wish">💌 Lời nhắn nhủ</option>
+                <option value="prophecy">😂 Lời tiên tri hài hước</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="capsule-message" class="form-label">Nội dung thông điệp:</label>
+              <textarea id="capsule-message" class="form-textarea" rows="4" placeholder="Hãy viết ra những kỳ vọng, lời chúc hay điều tiên tri thú vị nhất cho tuổi 22..." maxlength="600"></textarea>
+              <div class="textarea-counter"><span id="capsule-char-count">0</span>/600 ký tự</div>
+            </div>
+
+            <button type="button" id="btn-seal-capsule" class="btn btn-seal-capsule">
+              <span class="btn-icon">🔒</span>
+              <span>Niêm phong vào Hộp Thời Gian</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Capsules List -->
+        <div class="capsule-list-panel">
+          <div class="capsule-panel-header list-panel-header">
+            <div class="panel-title-group">
+              <span class="panel-icon">🏛️</span>
+              <div>
+                <h3 class="panel-title">Kho Lưu Trữ Viên Nang</h3>
+                <p class="panel-subtitle">Các bức thư đang được niêm phong an toàn</p>
+              </div>
+            </div>
+            <span class="capsule-total-badge" id="capsule-total-badge">0 viên nang</span>
+          </div>
+
+          <!-- List Scroll Area -->
+          <div class="capsule-items-scroll" id="capsule-items-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SOUVENIR TICKET STATION (Quầy In Vé Lưu Niệm - Bước 4)    -->
+  <!-- ======================================================== -->
+  <section id="ticket-station" class="ticket-station-section">
+    <div class="container ticket-container">
+      
+      <!-- Section Header -->
+      <div class="ticket-section-header">
+        <span class="ticket-badge">🎟️ TRẠM DỪNG CHÂN LƯU NIỆM</span>
+        <h2 class="ticket-section-title">QUẦY IN VÉ THAM QUAN LƯU NIỆM</h2>
+        <p class="ticket-section-desc">
+          Lưu giữ một mảnh ký ức về chuyến ghé thăm bảo tàng thời gian. Hãy nhập tên và chọn giai đoạn để tạo một tấm vé mang thông điệp dành riêng cho bạn!
+        </p>
+      </div>
+
+      <!-- Ticket Interaction Box: Form + Ticket Output -->
+      <div class="ticket-station-grid">
+        
+        <!-- Input Form Area -->
+        <div class="ticket-form-card">
+          <div class="ticket-form-header">
+            <span class="ticket-form-icon">🖨️</span>
+            <div>
+              <h3 class="ticket-form-title">Đăng Ký In Vé</h3>
+              <p class="ticket-form-subtitle">Tùy biến tấm vé lưu niệm của riêng bạn</p>
+            </div>
+          </div>
+
+          <div class="ticket-form-body">
+            <!-- Visitor Name Field -->
+            <div class="ticket-form-group">
+              <label for="ticket-visitor-name" class="ticket-label">
+                <span class="label-icon">👤</span>
+                <span>Tên người tham quan:</span>
+              </label>
+              <input 
+                type="text" 
+                id="ticket-visitor-name" 
+                class="ticket-input" 
+                placeholder="Khách tham quan ẩn danh" 
+                maxlength="36"
+                autocomplete="off"
+              >
+              <span class="ticket-input-note">Để trống sẽ tự động hiển thị: <strong>Khách tham quan ẩn danh</strong></span>
+            </div>
+
+            <!-- Favorite Stage Dropdown -->
+            <div class="ticket-form-group">
+              <label for="ticket-stage-select" class="ticket-label">
+                <span class="label-icon">⏳</span>
+                <span>Giai đoạn yêu thích nhất:</span>
+              </label>
+              <div class="ticket-select-wrap">
+                <select id="ticket-stage-select" class="ticket-select">
+                  <!-- Dynamically populated from js/memories.js -->
+                </select>
+                <span class="select-arrow">▼</span>
+              </div>
+            </div>
+
+            <!-- Print Button -->
+            <button id="btn-print-ticket" class="btn-print-ticket" type="button">
+              <span class="btn-print-icon">🖨️</span>
+              <span class="btn-print-text">In Vé Lưu Niệm</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Ticket Preview + Download Area -->
+        <div class="ticket-preview-panel">
+          
+          <div class="ticket-render-container" id="ticket-render-container">
+            
+            <!-- THE VINTAGE SOUVENIR TICKET (Pure HTML & CSS - ZERO <img> elements to guarantee zero CORS/canvas errors) -->
+            <div class="souvenir-ticket" id="souvenir-ticket">
+              
+              <!-- Ornamental Outer & Inner Frame -->
+              <div class="ticket-outer-border">
+                <div class="ticket-inner-border">
+                  
+                  <!-- Main Body (Left / Center) -->
+                  <div class="ticket-main-section">
+                    
+                    <!-- Ticket Top Brand -->
+                    <div class="ticket-header-row">
+                      <div class="ticket-logo-mark">
+                        <span class="mark-icon">🏛️</span>
+                      </div>
+                      <div class="ticket-header-text">
+                        <div class="ticket-museum-brand">LỊCH SỬ TIẾN HÓA CỦA HẢI THÀNH</div>
+                        <div class="ticket-category-tag">VÉ THAM QUAN ĐẶC BIỆT &bull; SOUVENIR ADMISSION PASS</div>
+                      </div>
+                      <div class="ticket-vintage-stamp">
+                        <div class="stamp-inner">
+                          <span class="stamp-star">★</span>
+                          <span class="stamp-text">ARCHIVED</span>
+                          <span class="stamp-date" id="ticket-stamp-year">2026</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Ticket Fields Grid -->
+                    <div class="ticket-data-grid">
+                      <div class="ticket-field">
+                        <span class="field-k">NGƯỜI THAM QUAN:</span>
+                        <span class="field-v visitor-name" id="ticket-disp-visitor">Khách tham quan ẩn danh</span>
+                      </div>
+                      <div class="ticket-field">
+                        <span class="field-k">GIAI ĐOẠN YÊU THÍCH:</span>
+                        <span class="field-v stage-name" id="ticket-disp-stage">Tuổi thơ hoài niệm</span>
+                      </div>
+                      <div class="ticket-field">
+                        <span class="field-k">NGÀY GIỜ GHÉ THĂM:</span>
+                        <span class="field-v time-text" id="ticket-disp-time">20/11/2026 • 17:35</span>
+                      </div>
+                      <div class="ticket-field">
+                        <span class="field-k">MÃ SỐ VÉ (SERIAL):</span>
+                        <span class="field-v serial-code" id="ticket-disp-serial">#MEM-2026-8888</span>
+                      </div>
+                    </div>
+
+                    <!-- Dedicated Message / Quote (Bốc ngẫu nhiên từ js/memories.js) -->
+                    <div class="ticket-dedication-box">
+                      <div class="dedication-label">
+                        <span class="star-icon">✨</span>
+                        <span>THÔNG ĐIỆP DÀNH RIÊNG CHO BẠN:</span>
+                      </div>
+                      <p class="dedication-quote" id="ticket-disp-quote">
+                        "Mỗi bức ảnh, mỗi dòng ghi chú ở đây đều là một mảnh ký ức thật trên hành trình lớn lên từ thuở nhỏ đến năm 2026."
+                      </p>
+                      <div class="dedication-source" id="ticket-disp-quote-source">
+                        — Trích từ Nhật ký Bảo tàng
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!-- Perforated Tear Line (Răng cưa xé vé) -->
+                  <div class="ticket-tear-divider">
+                    <div class="ticket-notch notch-top"></div>
+                    <div class="tear-dashed-line"></div>
+                    <div class="tear-scissor-mark">✂</div>
+                    <div class="ticket-notch notch-bottom"></div>
+                  </div>
+
+                  <!-- Ticket Stub (Right side / Cuống vé) -->
+                  <div class="ticket-stub-section">
+                    <div class="stub-brand">
+                      <span class="stub-icon">🏛️</span>
+                      <span class="stub-title">CUỐNG VÉ</span>
+                    </div>
+
+                    <div class="stub-meta">
+                      <div class="stub-field">
+                        <span class="stub-k">SERI:</span>
+                        <span class="stub-v serial-val" id="ticket-disp-stub-serial">#MEM-2026-8888</span>
+                      </div>
+                      <div class="stub-field">
+                        <span class="stub-k">KHÁCH:</span>
+                        <span class="stub-v" id="ticket-disp-stub-visitor">Ẩn danh</span>
+                      </div>
+                      <div class="stub-field">
+                        <span class="stub-k">NGÀY:</span>
+                        <span class="stub-v" id="ticket-disp-stub-date">20/11/2026</span>
+                      </div>
+                    </div>
+
+                    <!-- Pure CSS Barcode Strip -->
+                    <div class="stub-barcode-container">
+                      <div class="css-barcode" aria-hidden="true"></div>
+                      <div class="barcode-digits" id="ticket-disp-barcode-num">2 0 2 6 8 8 9 2 0 1 4</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Download Action Bar -->
+          <div class="ticket-action-bar">
+            <button id="btn-download-ticket" class="btn-download-ticket" type="button">
+              <span class="btn-dl-icon">⬇️</span>
+              <span id="btn-dl-text">Tải vé về máy (.PNG)</span>
+            </button>
+            <span class="ticket-quality-badge">✨ Xuất ảnh sắc nét 2x Retina &bull; Tấm vé hoài niệm độc bản</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING BACKGROUND MUSIC PLAYER WIDGET                  -->
+  <!-- ======================================================== -->
+  <aside id="floating-bg-player" class="floating-bg-player playing" aria-label="Trình phát nhạc nền">
+    <button id="bg-music-toggle-btn" class="bg-music-disk-btn" title="Tạm dừng nhạc nền">
+      <span class="bg-disk-icon" id="bg-disk-icon">🎵</span>
+    </button>
+    <div class="bg-music-info">
+      <span class="bg-music-tag">NHẠC NỀN TỔNG (SHUFFLE)</span>
+      <span class="bg-music-title" id="bg-music-current-title">Đang phát ngẫu nhiên...</span>
+    </div>
+    <button id="bg-music-next-btn" class="bg-music-skip-btn" title="Chuyển ngẫu nhiên bài kế tiếp">
+      ⏭️
+    </button>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- FOOTER                                                   -->
+  <!-- ======================================================== -->
+  <footer class="museum-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <span class="footer-icon">🧬</span>
+        <h3>Lịch Sử Tiến Hóa Của Hải Thành</h3>
+        <p>Biên niên sử tiến hóa vượt bậc từ thuở nhỏ (Lv.02) đến tuổi 21 (Lv.21). Xây dựng bằng tất cả sự trân trọng thời gian.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2007 - 2026 Lịch Sử Tiến Hóa Của Hải Thành. Tối ưu cho GitHub Pages &amp; Thiết bị di động.</p>
+        <a href="#hero" class="back-to-top">Lên đầu trang ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // Fallback to local copy if CDN is unavailable offline
+    if (typeof html2canvas === 'undefined') {
+      document.write('<script src="js/html2canvas.min.js"><\/script>');
+    }
+  </script>
+  <script src="js/memories.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
