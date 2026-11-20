@@ -1923,11 +1923,36 @@
   // 16. NHẠC NỀN TỰ ĐỘNG PHÁT & TRÁO NGẪU NHIÊN (NÂNG CẤP 2)
   // ========================================================
   function initBackgroundMusic() {
-    const rawList = window.BACKGROUND_PLAYLIST || [];
-    if (rawList.length === 0) return;
+    // ── Danh sách nhạc nền thực tế trong audio/nhạc nền/ ──
+    const BG_TRACKS = [
+      {
+        src: encodeURI('audio/nhạc nền/YTDown.com_YouTube_Media_-yHCeSZ-Nik_Multifandom-Dancin_009_128k.mp3'),
+        title: 'Dancin – Multifandom'
+      },
+      {
+        src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_a-q4IO-plBo_Tinh-Vệ-精卫-Kasber-Remix-Nhạc-Trung-Tu-Tiên-Remix-Suy_009_vbr.mp3'),
+        title: 'Tinh Vệ – Kasber Remix'
+      },
+      {
+        src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_GrAchTdepsU_24kGoldn-Mood-Official-Video-ft-iann-dior_009_vbr.mp3'),
+        title: 'Mood – 24kGoldn ft. iann dior'
+      },
+      {
+        src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_JGwWNGJdvx8_Ed-Sheeran-Shape-of-You-Official-Music-Video_011_vbr.mp3'),
+        title: 'Shape of You – Ed Sheeran'
+      },
+      {
+        src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_kqFLQG484pg_Lukas-Graham-7-Years_009_vbr.mp3'),
+        title: '7 Years – Lukas Graham'
+      },
+      {
+        src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_VmdfTTJ3NaA_Passenger-let-her-go-lyrics_009_vbr.mp3'),
+        title: 'Let Her Go – Passenger'
+      }
+    ];
 
-    // Tráo ngẫu nhiên thứ tự danh sách (Fisher-Yates shuffle)
-    const shuffled = [...rawList];
+    // Tráo ngẫu nhiên danh sách (Fisher-Yates) để bài đầu tiên là ngẫu nhiên
+    const shuffled = [...BG_TRACKS];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -1936,10 +1961,10 @@
     state.bgMusic.playlist = shuffled;
     state.bgMusic.currentIndex = 0;
     state.bgMusic.audio.volume = 0.5;
-    state.bgMusic.isUserMuted = false;
+    state.bgMusic.isUserMuted = false;  // Mặc định BẬT mỗi lần tải trang
     state.bgMusic.isPlaying = true;
 
-    // Hết bài tự chuyển ngẫu nhiên sang bài kế tiếp
+    // Hết bài → chuyển ngẫu nhiên bài khác (tránh lặp bài vừa phát)
     state.bgMusic.audio.addEventListener('ended', () => {
       nextBgMusicTrack();
     });
@@ -1957,11 +1982,11 @@
       }
     });
 
-    // Nạp bài đầu tiên
+    // Nạp bài đầu tiên (đã shuffle → luôn ngẫu nhiên)
     loadBgMusicTrack(0);
     state.bgMusic.audio.autoplay = true;
 
-    // Tự động phát nhạc nền mặc định ngay khi tải trang
+    // Tự động phát ngay khi trang load
     function startDefaultBgMusic() {
       if (state.bgMusic.isUserMuted) return;
       if (state.currentAudio && !state.currentAudio.paused) return;
@@ -1973,8 +1998,8 @@
           state.bgMusic.isPlaying = true;
           updateBgMusicUI();
         }).catch(() => {
-          // Trình duyệt chặn autoplay khi chưa có tương tác người dùng
-          // Giữ trạng thái giao diện là Bật (🎵) và tự động kích hoạt ngay ở tương tác đầu tiên
+          // Trình duyệt (Safari/Chrome mobile) chặn autoplay trước tương tác đầu tiên
+          // → đăng ký 1 lần duy nhất, cất nhạc ngay ở cú chạm/click đầu tiên
           updateBgMusicUI();
           const unlockAutoplay = () => {
             if (!state.bgMusic.isUserMuted && !state.currentAudio && (!state.cinema || !state.cinema.isPlaying)) {
@@ -1983,12 +2008,11 @@
                 updateBgMusicUI();
               }).catch(() => {});
             }
-            ['pointerdown', 'click', 'touchstart', 'scroll', 'wheel', 'keydown'].forEach(ev => {
+            ['pointerdown', 'click', 'touchstart', 'keydown'].forEach(ev => {
               window.removeEventListener(ev, unlockAutoplay, true);
             });
           };
-
-          ['pointerdown', 'click', 'touchstart', 'scroll', 'wheel', 'keydown'].forEach(ev => {
+          ['pointerdown', 'click', 'touchstart', 'keydown'].forEach(ev => {
             window.addEventListener(ev, unlockAutoplay, { once: true, passive: true, capture: true });
           });
         });
@@ -2073,7 +2097,14 @@
   }
 
   function nextBgMusicTrack() {
-    const nextIdx = (state.bgMusic.currentIndex + 1) % state.bgMusic.playlist.length;
+    // Chọn ngẫu nhiên bài khác (tránh lặp bài vừa phát nếu có >= 2 bài)
+    const list = state.bgMusic.playlist;
+    let nextIdx = state.bgMusic.currentIndex;
+    if (list.length > 1) {
+      do {
+        nextIdx = Math.floor(Math.random() * list.length);
+      } while (nextIdx === state.bgMusic.currentIndex);
+    }
     loadBgMusicTrack(nextIdx);
     if (!state.bgMusic.isUserMuted && !state.currentAudio && (!state.cinema || !state.cinema.isPlaying)) {
       playBgMusic();
