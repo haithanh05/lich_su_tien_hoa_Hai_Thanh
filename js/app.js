@@ -2054,9 +2054,11 @@
   }
 
   function toggleBgMusic() {
-    if (state.bgMusic.isPlaying || !state.bgMusic.isUserMuted) {
+    if (state.bgMusic.isPlaying && !state.bgMusic.isUserMuted) {
+      // Đang phát thật sự → tắt
       pauseBgMusic(false);
     } else {
+      // Đang tắt (do user mute hoặc bị block autoplay) → bật
       state.bgMusic.isUserMuted = false;
       // Dừng nhạc giai đoạn nếu có
       if (state.currentAudio) {
@@ -2140,7 +2142,7 @@
 
       if (save) {
         try {
-          localStorage.setItem('haithanh_theme', theme);
+          localStorage.setItem('museum_theme_v22', theme);
         } catch (e) {
           console.warn('LocalStorage không khả dụng:', e);
         }
@@ -2150,7 +2152,7 @@
     // Load saved theme or default to midnight
     let initialTheme = 'midnight';
     try {
-      const saved = localStorage.getItem('haithanh_theme');
+      const saved = localStorage.getItem('museum_theme_v22');
       if (saved && themeIcons[saved]) {
         initialTheme = saved;
       }

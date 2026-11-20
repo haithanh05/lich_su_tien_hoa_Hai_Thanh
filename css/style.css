@@ -6465,3 +6465,112 @@ html, body {
     max-width: 100% !important;
   }
 }
+
+/* ========================================================
+   SUPPLEMENT 5 — SỬA LỖI NAVBAR MOBILE v22 (20/11/2026)
+   Đảm bảo nút Đổi màu, Nhạc nền bấm được trên mobile.
+   ======================================================== */
+
+/* ── 1. Nâng z-index navbar lên trên mọi section ────────── */
+.sticky-nav {
+  z-index: 9999 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+/* ── 2. Nav container không clamp chiều cao ─────────────── */
+.nav-container {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* ── 3. Tất cả nút trên navbar bấm được ─────────────────── */
+.nav-btn,
+.nav-actions,
+.theme-selector-dropdown,
+#theme-toggle-btn,
+.theme-option-btn,
+#global-audio-toggle,
+#btn-nav-game {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10000 !important;
+}
+
+/* ── 4. Dropdown menu nổi lên trên hero section ──────────── */
+.theme-dropdown-menu {
+  pointer-events: auto !important;
+  z-index: 10001 !important;
+}
+
+.theme-selector-dropdown.open .theme-dropdown-menu {
+  pointer-events: auto !important;
+  z-index: 10001 !important;
+}
+
+@media (max-width: 768px) {
+
+  /* ── 5. Mobile: navbar và container thoải mái chiều cao ─ */
+  .sticky-nav {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+
+  .nav-container {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    pointer-events: auto !important;
+  }
+
+  /* ── 6. Nav-actions: cuộn ngang mượt, không bị clip ───── */
+  .nav-actions {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    pointer-events: auto !important;
+    z-index: 10000 !important;
+    position: relative !important;
+  }
+
+  /* ── 7. Từng nút: vùng chạm đủ lớn ─────────────────────── */
+  .nav-btn {
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 10000 !important;
+    min-height: 36px !important;
+    touch-action: manipulation !important;
+  }
+
+  /* ── 8. Theme selector & dropdown ────────────────────────── */
+  .theme-selector-dropdown {
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 10000 !important;
+    pointer-events: auto !important;
+  }
+
+  .theme-dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    left: 0 !important;
+    right: auto !important;
+    z-index: 10001 !important;
+    pointer-events: auto !important;
+    min-width: 180px !important;
+  }
+
+  /* ── 9. Hero section KHÔNG được đè lên navbar ───────────── */
+  .hero-section {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
