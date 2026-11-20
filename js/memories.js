@@ -8,8 +8,8 @@ window.MEMORIES_DATA = {
   },
   "stats": {
     "totalStages": 7,
-    "totalImages": 183,
-    "totalMemories": 183,
+    "totalImages": 178,
+    "totalMemories": 180,
     "totalHighlights": 10,
     "yearSpan": "2007 - 2026"
   },
@@ -2462,23 +2462,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2024-quick-36",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_6851_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_6851_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_6851_Original.JPG"
-          ],
-          "description": "Những ngày đầu làm quen với nhịp sống bận rộn, trải nghiệm cuộc sống sinh viên đầy sắc màu.",
-          "stageId": "2024",
-          "focalPoint": "center 35%"
-        },
-        {
           "id": "mem-2024-quick-37",
           "time": "2024",
           "month": null,
@@ -2752,23 +2735,6 @@ window.MEMORIES_DATA = {
           ],
           "images": [
             "images/2025/IMG_7978_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-15",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_7986_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_7986_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_7986_Original.JPG"
           ],
           "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
           "stageId": "2025",
@@ -3305,23 +3271,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 35%"
         },
         {
-          "id": "mem-2026-quick-13",
-          "time": "2026",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_0287",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2026/IMG_0287.JPG"
-          ],
-          "images": [
-            "images/2026/IMG_0287.JPG"
-          ],
-          "description": "Những dòng code miệt mài và phong thái tự tin của một lập trình viên tuổi 21.",
-          "stageId": "2026",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2026-quick-14",
           "time": "2026",
           "month": null,
@@ -3409,4 +3358,4 @@ window.MEMORIES_DATA = {
       ]
     }
   ]
-};
+};;
