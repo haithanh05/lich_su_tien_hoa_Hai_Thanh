@@ -1,19 +1,15 @@
-/**
- * Lịch Sử Tiến Hóa Của Hải Thành - Dữ liệu Kỷ niệm chuẩn hóa
- * Tự động tạo từ ghichu.txt, quét ảnh & nhạc nền
- */
 window.MEMORIES_DATA = {
   "siteInfo": {
     "title": "Lịch Sử Tiến Hóa Của Hải Thành",
     "intro": "Biên niên sử tiến hóa vượt bậc của sinh vật Hải Thành từ lúc còn là tân thủ Lv.02 ngây ngô đến chiến thần Lv.21 cày code xuyên màn đêm. Mời bạn bước vào hành trình xem anh ấy đã \"tiến hóa\" (và lag) ra sao!",
-    "heroImage": "images/khoi-nguyen.webp",
+    "heroImage": "images/Lúc nhỏ/IMG_0025_Original.JPG",
     "heroTitle": "Cột mốc khởi nguyên sinh vật",
     "heroDescription": "Mỗi bức ảnh, mỗi cột mốc là một lần nhảy vọt chỉ số EXP và thay đổi ngoại hình từ bé con mũm mĩm đến lập trình viên tuổi 21. Cùng khám phá bảng chỉ số tiến hóa đầy kỳ thú này!"
   },
   "stats": {
     "totalStages": 7,
-    "totalImages": 230,
-    "totalMemories": 235,
+    "totalImages": 183,
+    "totalMemories": 183,
     "totalHighlights": 10,
     "yearSpan": "2007 - 2026"
   },
@@ -303,23 +299,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2021-quick-3",
-          "time": "Tháng 01/2021",
-          "month": 1,
-          "isHighlight": false,
-          "title": "IMG_20210115_215435_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210115_215435_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210115_215435_Original.JPG"
-          ],
-          "description": "Dấu ấn tuổi 16 mộng mơ, từng bước khám phá thế giới xung quanh.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2021-quick-4",
           "time": "Tháng 02/2021",
           "month": 2,
@@ -333,23 +312,6 @@ window.MEMORIES_DATA = {
             "images/2021/IMG_20210216_035801_Original.JPG"
           ],
           "description": "Bắt trọn khoảnh khắc lúc 3h sáng, sinh vật này dường như chưa biết mệt mỏi là gì.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-5",
-          "time": "Tháng 03/2021",
-          "month": 3,
-          "isHighlight": false,
-          "title": "IMG_20210301_164740_584_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210301_164740_584_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210301_164740_584_Original.JPG"
-          ],
-          "description": "Dấu ấn tuổi 16 mộng mơ, từng bước khám phá thế giới xung quanh.",
           "stageId": "2021",
           "focalPoint": "center 20%"
         },
@@ -371,23 +333,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2021-quick-7",
-          "time": "Tháng 03/2021",
-          "month": 3,
-          "isHighlight": false,
-          "title": "IMG_20210309_005534_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210309_005534_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210309_005534_Original.JPG"
-          ],
-          "description": "Lưu giữ một góc nhỏ rạng sáng, thanh xuân là những đêm thức trọn vẹn.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2021-quick-8",
           "time": "Tháng 03/2021",
           "month": 3,
@@ -399,23 +344,6 @@ window.MEMORIES_DATA = {
           ],
           "images": [
             "images/2021/IMG_20210310_170136_Original.JPG"
-          ],
-          "description": "Năm đầu cấp 3 (Lv.16) học online, vừa cày bài vừa ngắm mưa rơi ngoài khung cửa sổ.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-9",
-          "time": "Tháng 04/2021",
-          "month": 4,
-          "isHighlight": false,
-          "title": "IMG_20210402_205134_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210402_205134_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210402_205134_Original.JPG"
           ],
           "description": "Năm đầu cấp 3 (Lv.16) học online, vừa cày bài vừa ngắm mưa rơi ngoài khung cửa sổ.",
           "stageId": "2021",
@@ -469,40 +397,6 @@ window.MEMORIES_DATA = {
             "images/2021/IMG_20210504_000146_Original.JPG"
           ],
           "description": "Selfie trước gương",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-13",
-          "time": "Tháng 05/2021",
-          "month": 5,
-          "isHighlight": false,
-          "title": "IMG_20210508_210938_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210508_210938_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210508_210938_Original.JPG"
-          ],
-          "description": "Dấu ấn tuổi 16 mộng mơ, từng bước khám phá thế giới xung quanh.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-14",
-          "time": "Tháng 05/2021",
-          "month": 5,
-          "isHighlight": false,
-          "title": "IMG_20210508_212226_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210508_212226_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210508_212226_Original.JPG"
-          ],
-          "description": "Những ngày tháng 16 tuổi nhiều bỡ ngỡ, bắt đầu hành trình nâng cấp bản thân.",
           "stageId": "2021",
           "focalPoint": "center 20%"
         },
@@ -575,23 +469,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 35%"
         },
         {
-          "id": "mem-2021-quick-19",
-          "time": "Tháng 07/2021",
-          "month": 7,
-          "isHighlight": false,
-          "title": "IMG_20210710_211844_148_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/IMG_20210710_211844_148_Original.JPG"
-          ],
-          "images": [
-            "images/2021/IMG_20210710_211844_148_Original.JPG"
-          ],
-          "description": "Dấu ấn tuổi 16 mộng mơ, từng bước khám phá thế giới xung quanh.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2021-quick-20",
           "time": "Tháng 07/2021",
           "month": 7,
@@ -622,23 +499,6 @@ window.MEMORIES_DATA = {
             "images/2021/PicsArt_08-05-06_1628169714412_Original.JPG"
           ],
           "description": "Khoảnh khắc học trò giản dị, thanh xuân cấp 3 bắt đầu từ những điều nhỏ bé nhất.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-22",
-          "time": "Tháng 08/2021",
-          "month": 8,
-          "isHighlight": false,
-          "title": "Screenshot_20210817_075439_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/Screenshot_20210817_075439_Original.JPG"
-          ],
-          "images": [
-            "images/2021/Screenshot_20210817_075439_Original.JPG"
-          ],
-          "description": "Chụp màn hình lưu lại kỷ niệm đáng nhớ hoặc một dòng tin nhắn đặc biệt.",
           "stageId": "2021",
           "focalPoint": "center 20%"
         },
@@ -694,23 +554,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2021-quick-26",
-          "time": "Tháng 09/2021",
-          "month": 9,
-          "isHighlight": false,
-          "title": "Screenshot_20210914_134429_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/Screenshot_20210914_134429_Original.JPG"
-          ],
-          "images": [
-            "images/2021/Screenshot_20210914_134429_Original.JPG"
-          ],
-          "description": "Một bức ảnh chụp màn hình lưu nhanh khoảnh khắc thú vị đang lướt mạng.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2021-quick-27",
           "time": "Tháng 09/2021",
           "month": 9,
@@ -741,23 +584,6 @@ window.MEMORIES_DATA = {
             "images/2021/Screenshot_20211025_040354_Original.JPG"
           ],
           "description": "Chụp màn hình lúc 4h sáng — bằng chứng cú đêm cày cuốc không thể chối cãi.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-29",
-          "time": "Tháng 10/2021",
-          "month": 10,
-          "isHighlight": false,
-          "title": "Screenshot_20211025_040404_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/Screenshot_20211025_040404_Original.JPG"
-          ],
-          "images": [
-            "images/2021/Screenshot_20211025_040404_Original.JPG"
-          ],
-          "description": "Khoảnh khắc rạng sáng 4h còn online, hội cú đêm nhìn là nhận người quen ngay.",
           "stageId": "2021",
           "focalPoint": "center 20%"
         },
@@ -860,23 +686,6 @@ window.MEMORIES_DATA = {
             "images/2021/Screenshot_20211231_224116_Original.JPG"
           ],
           "description": "Chụp màn hình lưu lại kỷ niệm đáng nhớ hoặc một dòng tin nhắn đặc biệt.",
-          "stageId": "2021",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2021-quick-36",
-          "time": "2021",
-          "month": null,
-          "isHighlight": false,
-          "title": "Screenshot_20220104_231946_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2021/Screenshot_20220104_231946_Original.JPG"
-          ],
-          "images": [
-            "images/2021/Screenshot_20220104_231946_Original.JPG"
-          ],
-          "description": "Một bức ảnh chụp màn hình lưu nhanh khoảnh khắc thú vị đang lướt mạng.",
           "stageId": "2021",
           "focalPoint": "center 20%"
         },
@@ -1126,23 +935,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2022-quick-9",
-          "time": "2022",
-          "month": null,
-          "isHighlight": false,
-          "title": "received_741354817210106_Original_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/received_741354817210106_Original_Original.JPG"
-          ],
-          "images": [
-            "images/2022/received_741354817210106_Original_Original.JPG"
-          ],
-          "description": "Ảnh bạn bè truyền tay gửi qua mạng, dù bị nén chất lượng nhưng kỷ niệm vẫn nét căng.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2022-quick-10",
           "time": "Tháng 01/2022",
           "month": 1,
@@ -1156,23 +948,6 @@ window.MEMORIES_DATA = {
             "images/2022/Screenshot_20220109_122451_Original.JPG"
           ],
           "description": "Tấm ảnh cap màn hình ngẫu hứng, lưu giữ một mảnh thông tin của ngày hôm đó.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-11",
-          "time": "Tháng 04/2022",
-          "month": 4,
-          "isHighlight": false,
-          "title": "IMG_20220411_200147_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20220411_200147_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20220411_200147_Original.JPG"
-          ],
-          "description": "Nụ cười và nhiệt huyết tuổi 17, những kỷ niệm học trò không bao giờ phai.",
           "stageId": "2022",
           "focalPoint": "center 20%"
         },
@@ -1207,23 +982,6 @@ window.MEMORIES_DATA = {
             "images/2022/IMG_20220416_143520_Original.JPG"
           ],
           "description": "Những ngày thanh xuân cấp 3 cháy hết mình cùng bạn bè và ước mơ phía trước.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-14",
-          "time": "Tháng 04/2022",
-          "month": 4,
-          "isHighlight": false,
-          "title": "IMG_20220416_185245_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20220416_185245_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20220416_185245_Original.JPG"
-          ],
-          "description": "Nụ cười và nhiệt huyết tuổi 17, những kỷ niệm học trò không bao giờ phai.",
           "stageId": "2022",
           "focalPoint": "center 20%"
         },
@@ -1292,23 +1050,6 @@ window.MEMORIES_DATA = {
             "images/2022/Screenshot_20220502_210208_Original_Original.JPG"
           ],
           "description": "Chụp màn hình lưu lại kỷ niệm đáng nhớ hoặc một dòng tin nhắn đặc biệt.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-19",
-          "time": "Tháng 05/2022",
-          "month": 5,
-          "isHighlight": false,
-          "title": "IMG_20220509_144323_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20220509_144323_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20220509_144323_Original.JPG"
-          ],
-          "description": "Những ngày thanh xuân cấp 3 cháy hết mình cùng bạn bè và ước mơ phía trước.",
           "stageId": "2022",
           "focalPoint": "center 20%"
         },
@@ -1411,40 +1152,6 @@ window.MEMORIES_DATA = {
             "images/2022/IMG_20220520_224811_Original_Original.JPG"
           ],
           "description": "Khoảnh khắc ghi dấu tuổi 17 — cái tuổi đẹp nhất của thời áo trắng đến trường.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-26",
-          "time": "Tháng 06/2022",
-          "month": 6,
-          "isHighlight": false,
-          "title": "IMG_20220610_191731_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20220610_191731_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20220610_191731_Original.JPG"
-          ],
-          "description": "Tuổi 17 (Lv.17) rực rỡ, áp lực bài vở nhưng lúc nào cũng thừa năng lượng nhí nhố.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-27",
-          "time": "Tháng 06/2022",
-          "month": 6,
-          "isHighlight": false,
-          "title": "IMG_20220610_191824_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20220610_191824_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20220610_191824_Original.JPG"
-          ],
-          "description": "Tuổi 17 (Lv.17) rực rỡ, áp lực bài vở nhưng lúc nào cũng thừa năng lượng nhí nhố.",
           "stageId": "2022",
           "focalPoint": "center 20%"
         },
@@ -1602,23 +1309,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 35%"
         },
         {
-          "id": "mem-2022-quick-37",
-          "time": "Tháng 09/2022",
-          "month": 9,
-          "isHighlight": false,
-          "title": "Screenshot_20220919_214924_Original_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/Screenshot_20220919_214924_Original_Original.JPG"
-          ],
-          "images": [
-            "images/2022/Screenshot_20220919_214924_Original_Original.JPG"
-          ],
-          "description": "Một bức ảnh chụp màn hình lưu nhanh khoảnh khắc thú vị đang lướt mạng.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2022-quick-38",
           "time": "Tháng 09/2022",
           "month": 9,
@@ -1687,23 +1377,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2022-quick-42",
-          "time": "Tháng 10/2022",
-          "month": 10,
-          "isHighlight": false,
-          "title": "retouch_2022100418580614_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/retouch_2022100418580614_Original.JPG"
-          ],
-          "images": [
-            "images/2022/retouch_2022100418580614_Original.JPG"
-          ],
-          "description": "Góc nghiêng thần thánh đã qua 7749 bước tút tát giao diện, tự tin khoe visual.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2022-quick-43",
           "time": "Tháng 10/2022",
           "month": 10,
@@ -1717,23 +1390,6 @@ window.MEMORIES_DATA = {
             "images/2022/retouch_2022100418583511_Original_Original.JPG"
           ],
           "description": "Một chiếc ảnh filter đỉnh cao, visual nét căng chuẩn bị up story nhận bão tương tác.",
-          "stageId": "2022",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2022-quick-44",
-          "time": "Tháng 10/2022",
-          "month": 10,
-          "isHighlight": false,
-          "title": "IMG_20221006_224249_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2022/IMG_20221006_224249_Original.JPG"
-          ],
-          "images": [
-            "images/2022/IMG_20221006_224249_Original.JPG"
-          ],
-          "description": "Những ngày thanh xuân cấp 3 cháy hết mình cùng bạn bè và ước mơ phía trước.",
           "stageId": "2022",
           "focalPoint": "center 20%"
         },
@@ -1983,40 +1639,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 35%"
         },
         {
-          "id": "mem-2023-quick-1",
-          "time": "Tháng 01/2023",
-          "month": 1,
-          "isHighlight": false,
-          "title": "IMG_20230101_185849_Original_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2023/IMG_20230101_185849_Original_Original.JPG"
-          ],
-          "images": [
-            "images/2023/IMG_20230101_185849_Original_Original.JPG"
-          ],
-          "description": "Mốc son tuổi 18 sẵn sàng vươn mình ra biển lớn, khép lại thời học sinh tươi đẹp.",
-          "stageId": "2023",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2023-quick-2",
-          "time": "Tháng 01/2023",
-          "month": 1,
-          "isHighlight": false,
-          "title": "IMG_20230101_190001_Original_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2023/IMG_20230101_190001_Original_Original.JPG"
-          ],
-          "images": [
-            "images/2023/IMG_20230101_190001_Original_Original.JPG"
-          ],
-          "description": "Năm cuối cấp 3 (Lv.18) chạy đua cùng các kỳ thi, những đêm ôn bài căng thẳng nhưng kiên định.",
-          "stageId": "2023",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2023-quick-3",
           "time": "Tháng 01/2023",
           "month": 1,
@@ -2117,23 +1739,6 @@ window.MEMORIES_DATA = {
           "description": "Mốc son tuổi 18 sẵn sàng vươn mình ra biển lớn, khép lại thời học sinh tươi đẹp.",
           "stageId": "2023",
           "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2023-quick-9",
-          "time": "2023",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_1619_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2023/IMG_1619_Original.JPG"
-          ],
-          "images": [
-            "images/2023/IMG_1619_Original.JPG"
-          ],
-          "description": "Trưởng thành từ những áp lực, đánh dấu bước ngoặt lớn của tuổi 18.",
-          "stageId": "2023",
-          "focalPoint": "center 35%"
         },
         {
           "id": "mem-2023-quick-10",
@@ -2483,23 +2088,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2024-quick-4",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_4183_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_4183_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_4183_Original.JPG"
-          ],
-          "description": "Một góc nhìn tuổi 19 năng động, dám dấn thân và không ngại thử thách.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2024-quick-5",
           "time": "2024",
           "month": null,
@@ -2653,23 +2241,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2024-quick-14",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5125_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5125_Original.PNG"
-          ],
-          "images": [
-            "images/2024/IMG_5125_Original.PNG"
-          ],
-          "description": "Dấu mốc tự lập đầy tự hào, tự kiếm những đồng tiền đầu tiên và tích lũy trải nghiệm.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2024-quick-15",
           "time": "2024",
           "month": null,
@@ -2683,23 +2254,6 @@ window.MEMORIES_DATA = {
             "images/2024/IMG_5151_Original.JPG"
           ],
           "description": "Những ngày đầu làm quen với nhịp sống bận rộn, trải nghiệm cuộc sống sinh viên đầy sắc màu.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-16",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5627_Original_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5627_Original_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5627_Original_Original.JPG"
-          ],
-          "description": "Tuổi 19 (Lv.19) tự lập bước vào đời, vừa học đại học vừa cày việc kiếm tiền xây dựng tương lai.",
           "stageId": "2024",
           "focalPoint": "center 20%"
         },
@@ -2738,40 +2292,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2024-quick-19",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5776_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5776_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5776_Original.JPG"
-          ],
-          "description": "Một góc nhìn tuổi 19 năng động, dám dấn thân và không ngại thử thách.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-20",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5789_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5789_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5789_Original.JPG"
-          ],
-          "description": "Tuổi 19 (Lv.19) tự lập bước vào đời, vừa học đại học vừa cày việc kiếm tiền xây dựng tương lai.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2024-quick-21",
           "time": "2024",
           "month": null,
@@ -2789,23 +2309,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2024-quick-22",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5820_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5820_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5820_Original.JPG"
-          ],
-          "description": "Tuổi 19 (Lv.19) tự lập bước vào đời, vừa học đại học vừa cày việc kiếm tiền xây dựng tương lai.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2024-quick-23",
           "time": "2024",
           "month": null,
@@ -2819,57 +2322,6 @@ window.MEMORIES_DATA = {
             "images/2024/IMG_5874_Original.JPG"
           ],
           "description": "Một góc nhìn tuổi 19 năng động, dám dấn thân và không ngại thử thách.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-24",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5889_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5889_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5889_Original.JPG"
-          ],
-          "description": "Dấu mốc tự lập đầy tự hào, tự kiếm những đồng tiền đầu tiên và tích lũy trải nghiệm.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-25",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5891_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5891_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5891_Original.JPG"
-          ],
-          "description": "Dấu mốc tự lập đầy tự hào, tự kiếm những đồng tiền đầu tiên và tích lũy trải nghiệm.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-26",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_5928_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_5928_Original.JPG"
-          ],
-          "images": [
-            "images/2024/IMG_5928_Original.JPG"
-          ],
-          "description": "Những ngày đầu làm quen với nhịp sống bận rộn, trải nghiệm cuộc sống sinh viên đầy sắc màu.",
           "stageId": "2024",
           "focalPoint": "center 20%"
         },
@@ -2955,23 +2407,6 @@ window.MEMORIES_DATA = {
             "images/2024/IMG_6699_Original.PNG"
           ],
           "description": "Một góc nhìn tuổi 19 năng động, dám dấn thân và không ngại thử thách.",
-          "stageId": "2024",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2024-quick-32",
-          "time": "2024",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_6702_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2024/IMG_6702_Original.PNG"
-          ],
-          "images": [
-            "images/2024/IMG_6702_Original.PNG"
-          ],
-          "description": "Tuổi 19 (Lv.19) tự lập bước vào đời, vừa học đại học vừa cày việc kiếm tiền xây dựng tương lai.",
           "stageId": "2024",
           "focalPoint": "center 20%"
         },
@@ -3153,40 +2588,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2025-quick-1",
-          "time": "Tháng 03/2025",
-          "month": 3,
-          "isHighlight": false,
-          "title": "IMG20250311133654_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG20250311133654_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG20250311133654_Original.JPG"
-          ],
-          "description": "Trưởng thành không chỉ ở diện mạo mà còn ở sự điềm tĩnh trước mọi sóng gió cuộc đời.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-2",
-          "time": "Tháng 03/2025",
-          "month": 3,
-          "isHighlight": false,
-          "title": "IMG20250319170424_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG20250319170424_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG20250319170424_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 35%"
-        },
-        {
           "id": "mem-2025-quick-3",
           "time": "Tháng 03/2025",
           "month": 3,
@@ -3219,23 +2620,6 @@ window.MEMORIES_DATA = {
           "description": "Trưởng thành không chỉ ở diện mạo mà còn ở sự điềm tĩnh trước mọi sóng gió cuộc đời.",
           "stageId": "2025",
           "focalPoint": "center 35%"
-        },
-        {
-          "id": "mem-2025-quick-5",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_6879_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_6879_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_6879_Original.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
         },
         {
           "id": "mem-2025-quick-6",
@@ -3319,23 +2703,6 @@ window.MEMORIES_DATA = {
             "images/2025/IMG_7501_Original.JPG"
           ],
           "description": "Những ngày tháng 20 tuổi đầy nhiệt huyết, sẵn sàng bứt phá cho những mục tiêu lớn.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-11",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_7614_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_7614_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_7614_Original.JPG"
-          ],
-          "description": "Trưởng thành không chỉ ở diện mạo mà còn ở sự điềm tĩnh trước mọi sóng gió cuộc đời.",
           "stageId": "2025",
           "focalPoint": "center 20%"
         },
@@ -3459,23 +2826,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2025-quick-19",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8001_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8001_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8001_Original.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2025-quick-20",
           "time": "2025",
           "month": null,
@@ -3510,23 +2860,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2025-quick-22",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8019_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8019_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8019_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2025-quick-23",
           "time": "2025",
           "month": null,
@@ -3540,91 +2873,6 @@ window.MEMORIES_DATA = {
             "images/2025/IMG_8750.PNG"
           ],
           "description": "Những ngày tháng 20 tuổi đầy nhiệt huyết, sẵn sàng bứt phá cho những mục tiêu lớn.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-24",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8946_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8946_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8946_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-25",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8954_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8954_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8954_Original.JPG"
-          ],
-          "description": "Những ngày tháng 20 tuổi đầy nhiệt huyết, sẵn sàng bứt phá cho những mục tiêu lớn.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-26",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8970_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8970_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8970_Original.JPG"
-          ],
-          "description": "Những ngày tháng 20 tuổi đầy nhiệt huyết, sẵn sàng bứt phá cho những mục tiêu lớn.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-27",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_8984_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_8984_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_8984_Original.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-28",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_9341",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_9341.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_9341.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
           "stageId": "2025",
           "focalPoint": "center 20%"
         },
@@ -3731,91 +2979,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2025-quick-35",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_0939_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_0939_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_0939_Original.JPG"
-          ],
-          "description": "Trưởng thành không chỉ ở diện mạo mà còn ở sự điềm tĩnh trước mọi sóng gió cuộc đời.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-36",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_1079_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_1079_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_1079_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-37",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_1339",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_1339.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_1339.JPG"
-          ],
-          "description": "Trưởng thành không chỉ ở diện mạo mà còn ở sự điềm tĩnh trước mọi sóng gió cuộc đời.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-38",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_1341_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_1341_Original.JPG"
-          ],
-          "images": [
-            "images/2025/IMG_1341_Original.JPG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-39",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_1411_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/IMG_1411_Original.PNG"
-          ],
-          "images": [
-            "images/2025/IMG_1411_Original.PNG"
-          ],
-          "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 35%"
-        },
-        {
           "id": "mem-2025-quick-40",
           "time": "2025",
           "month": null,
@@ -3833,23 +2996,6 @@ window.MEMORIES_DATA = {
           "focalPoint": "center 20%"
         },
         {
-          "id": "mem-2025-quick-41",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "att.5hPanoEnDsQ6TOYf0yKRHCpyq7W9_kyq3EO-uge1Ks0_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/att.5hPanoEnDsQ6TOYf0yKRHCpyq7W9_kyq3EO-uge1Ks0_Original.JPG"
-          ],
-          "images": [
-            "images/2025/att.5hPanoEnDsQ6TOYf0yKRHCpyq7W9_kyq3EO-uge1Ks0_Original.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
           "id": "mem-2025-quick-42",
           "time": "2025",
           "month": null,
@@ -3863,23 +3009,6 @@ window.MEMORIES_DATA = {
             "images/2025/att.D_SD-tPTkGyoZ8ia2Phn4VA5af1A0eLuPgo-3IlzYJ0_Original.JPG"
           ],
           "description": "Tuổi 20 (Lv.20) bản lĩnh và vững vàng, ánh mắt toát lên sự tự tin của người từng trải.",
-          "stageId": "2025",
-          "focalPoint": "center 20%"
-        },
-        {
-          "id": "mem-2025-quick-43",
-          "time": "2025",
-          "month": null,
-          "isHighlight": false,
-          "title": "att.Fo3qVcXanyNHtTTf3fjiTarsup-sYB38Yx5zjWvH5Uo_Original",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2025/att.Fo3qVcXanyNHtTTf3fjiTarsup-sYB38Yx5zjWvH5Uo_Original.JPG"
-          ],
-          "images": [
-            "images/2025/att.Fo3qVcXanyNHtTTf3fjiTarsup-sYB38Yx5zjWvH5Uo_Original.JPG"
-          ],
-          "description": "Cột mốc tuổi 20 tròn trịa, định hình phong cách và khẳng định giá trị bản thân.",
           "stageId": "2025",
           "focalPoint": "center 20%"
         },
@@ -4072,23 +3201,6 @@ window.MEMORIES_DATA = {
           "description": "Đỉnh cao tiến hóa từ Lv.02 đến Lv.21, sẵn sàng chinh phục những đỉnh cao mới!",
           "stageId": "2026",
           "focalPoint": "center 35%"
-        },
-        {
-          "id": "mem-2026-quick-6",
-          "time": "2026",
-          "month": null,
-          "isHighlight": false,
-          "title": "IMG_0134",
-          "tag": "Kho lưu trữ",
-          "image": [
-            "images/2026/IMG_0134.JPG"
-          ],
-          "images": [
-            "images/2026/IMG_0134.JPG"
-          ],
-          "description": "Tuổi 21 (Lv.21) chiến thần IT cày code, ánh sáng màn hình thâu đêm thắp sáng tương lai.",
-          "stageId": "2026",
-          "focalPoint": "center 20%"
         },
         {
           "id": "mem-2026-quick-7",
@@ -4298,45 +3410,3 @@ window.MEMORIES_DATA = {
     }
   ]
 };
-
-/**
- * Danh sách nhạc nền tự động phát ngẫu nhiên (BACKGROUND_PLAYLIST)
- */
-window.BACKGROUND_PLAYLIST = [
-  {
-    "id": "bg-1",
-    "title": "Dancin (Aaron Smith / Krono Remix)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTDown.com_YouTube_Media_-yHCeSZ-Nik_Multifandom-Dancin_009_128k.mp3",
-    "file": "audio/nhạc nền/YTDown.com_YouTube_Media_-yHCeSZ-Nik_Multifandom-Dancin_009_128k.mp3"
-  },
-  {
-    "id": "bg-2",
-    "title": "Mood (24kGoldn ft. iann dior)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTSave.to_YouTube_Media_GrAchTdepsU_24kGoldn-Mood-Official-Video-ft-iann-dior_009_vbr.mp3",
-    "file": "audio/nhạc nền/YTSave.to_YouTube_Media_GrAchTdepsU_24kGoldn-Mood-Official-Video-ft-iann-dior_009_vbr.mp3"
-  },
-  {
-    "id": "bg-3",
-    "title": "Shape of You (Ed Sheeran)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTSave.to_YouTube_Media_JGwWNGJdvx8_Ed-Sheeran-Shape-of-You-Official-Music-Video_011_vbr.mp3",
-    "file": "audio/nhạc nền/YTSave.to_YouTube_Media_JGwWNGJdvx8_Ed-Sheeran-Shape-of-You-Official-Music-Video_011_vbr.mp3"
-  },
-  {
-    "id": "bg-4",
-    "title": "Let Her Go (Passenger)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTSave.to_YouTube_Media_VmdfTTJ3NaA_Passenger-let-her-go-lyrics_009_vbr.mp3",
-    "file": "audio/nhạc nền/YTSave.to_YouTube_Media_VmdfTTJ3NaA_Passenger-let-her-go-lyrics_009_vbr.mp3"
-  },
-  {
-    "id": "bg-5",
-    "title": "Tinh Vệ (Kasber Remix)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTSave.to_YouTube_Media_a-q4IO-plBo_Tinh-V%E1%BB%87-%E7%B2%BE%E5%8D%AB-Kasber-Remix-Nh%E1%BA%A1c-Trung-Tu-Ti%C3%AAn-Remix-Suy_009_vbr.mp3",
-    "file": "audio/nhạc nền/YTSave.to_YouTube_Media_a-q4IO-plBo_Tinh-Vệ-精卫-Kasber-Remix-Nhạc-Trung-Tu-Tiên-Remix-Suy_009_vbr.mp3"
-  },
-  {
-    "id": "bg-6",
-    "title": "7 Years (Lukas Graham)",
-    "src": "audio/nh%E1%BA%A1c%20n%E1%BB%81n/YTSave.to_YouTube_Media_kqFLQG484pg_Lukas-Graham-7-Years_009_vbr.mp3",
-    "file": "audio/nhạc nền/YTSave.to_YouTube_Media_kqFLQG484pg_Lukas-Graham-7-Years_009_vbr.mp3"
-  }
-];

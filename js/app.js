@@ -1664,6 +1664,24 @@
         }
       }
     }
+
+    // Global image-error guard: ẩn thẻ kỷ niệm nếu ảnh 404
+    window.addEventListener('error', function (e) {
+      const target = e.target;
+      if (target && target.tagName === 'IMG') {
+        // Tìm thẻ cha gần nhất là memory-card hoặc rpg-avatar (ảnh bìa stage)
+        const card = target.closest('.memory-card');
+        if (card) {
+          card.style.display = 'none';
+          return;
+        }
+        // Với ảnh cover trong rpg-avatar, chỉ ẩn img tránh khung vỡ
+        const avatar = target.closest('.rpg-avatar');
+        if (avatar) {
+          target.style.visibility = 'hidden';
+        }
+      }
+    }, true /* capture phase – bắt trước khi bubble */);
   }
 
   // ========================================================
@@ -2129,8 +2147,8 @@
       }
     }
 
-    // Load saved theme or default
-    let initialTheme = 'obsidian';
+    // Load saved theme or default to midnight
+    let initialTheme = 'midnight';
     try {
       const saved = localStorage.getItem('haithanh_theme');
       if (saved && themeIcons[saved]) {
