@@ -8128,6 +8128,297 @@ body.museum-body > :not(#cultivation-bg):not(.ambient-glow):not(#sticky-header):
   }
 }
 
+html[data-theme="xianxia"] .btn-open-archive::before {
+  top: -25% !important;
+  right: auto !important;
+  bottom: -25% !important;
+  left: -60% !important;
+  width: 34% !important;
+  height: auto !important;
+  z-index: 1 !important;
+  transform: skewX(-20deg) !important;
+  background: linear-gradient(90deg, transparent, rgba(228, 255, 246, 0.78), rgba(255, 221, 150, 0.46), transparent) !important;
+  animation: sword-energy-sweep 4.8s ease-in-out infinite !important;
+}
+
+html[data-theme="xianxia"] .btn-open-archive::after {
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  z-index: 1 !important;
+  transform: none !important;
+  background: none !important;
+  animation: none !important;
+  opacity: 0.65 !important;
+}
+
+html[data-theme="xianxia"] .btn-open-archive:active {
+  transform: scale(0.975) !important;
+}
+
+html[data-theme="xianxia"] .btn-open-archive:active::after {
+  top: -9px !important;
+  right: -9px !important;
+  bottom: -9px !important;
+  left: -9px !important;
+  opacity: 0 !important;
+}
+
+/* Xianxia liquid-glass finish and reliable background/button layering */
+#cultivation-bg,
+#cultivation-bg *,
+.ambient-glow {
+  pointer-events: none !important;
+}
+
+#cultivation-bg {
+  z-index: 0;
+}
+
+#xianxia-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none !important;
+}
+
+#cultivation-bg .immortal-landscape,
+#cultivation-bg .floating-islands {
+  display: none !important;
+}
+
+.rpg-card,
+.rpg-substat-card,
+.music-player-card,
+.sticky-nav,
+.filmstrip-dialog,
+.modal-dialog,
+.lightbox-container {
+  background-color: rgba(8, 22, 19, 0.42) !important;
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(116, 255, 222, 0.12), transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(6, 20, 17, 0.22)) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px rgba(45, 212, 191, 0.2),
+    0 12px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.rpg-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.rpg-card::before,
+.rpg-card::after {
+  pointer-events: none !important;
+}
+
+.rpg-card::before {
+  display: none !important;
+  content: none !important;
+}
+
+.rpg-card::after {
+  opacity: 0.035;
+}
+
+.rpg-card > * {
+  z-index: 2;
+}
+
+.rpg-substat-card {
+  border-radius: 14px;
+}
+
+.sticky-nav {
+  background-color: rgba(8, 22, 19, 0.72) !important;
+}
+
+.filmstrip-dialog,
+.modal-dialog,
+.lightbox-container {
+  background-color: rgba(8, 22, 19, 0.78) !important;
+}
+
+.btn-open-archive {
+  position: relative !important;
+  z-index: 3 !important;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 0.75rem;
+  max-width: 100%;
+  color: #e8fff8 !important;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(221, 255, 241, 0.38), transparent 48%),
+    linear-gradient(135deg, rgba(23, 133, 104, 0.82), rgba(9, 62, 54, 0.8) 52%, rgba(117, 82, 27, 0.7)) !important;
+  border: 1px solid rgba(187, 255, 226, 0.76) !important;
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.48),
+    inset 0 -2px 3px rgba(0, 35, 29, 0.42),
+    0 9px 28px rgba(0, 0, 0, 0.36),
+    0 0 20px rgba(45, 212, 191, 0.2) !important;
+  text-shadow: 0 1px 8px rgba(0, 25, 20, 0.72);
+  transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.btn-open-archive::before {
+  content: '' !important;
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -60%;
+  z-index: 1;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(228, 255, 246, 0.78), rgba(255, 221, 150, 0.46), transparent) !important;
+  transform: skewX(-20deg);
+  animation: sword-energy-sweep 4.8s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+.btn-open-archive::after {
+  content: '' !important;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid rgba(224, 255, 242, 0.74);
+  border-radius: inherit;
+  background: none !important;
+  box-shadow: inset 0 0 16px rgba(143, 255, 221, 0.2);
+  opacity: 0.65;
+  transition: inset 250ms ease, opacity 250ms ease;
+  pointer-events: none !important;
+}
+
+.btn-open-archive .archive-icon,
+.btn-open-archive .archive-icon svg {
+  display: block;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+}
+
+.btn-open-archive .archive-icon {
+  position: relative;
+  z-index: 2;
+  color: #9fffe0;
+  filter: drop-shadow(0 0 7px rgba(89, 255, 205, 0.9)) drop-shadow(0 0 9px rgba(255, 210, 115, 0.42));
+}
+
+.btn-open-archive > span:last-child {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-open-archive:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.55),
+    inset 0 -2px 3px rgba(0, 35, 29, 0.38),
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 0 28px rgba(45, 212, 191, 0.34) !important;
+}
+
+.btn-open-archive:active {
+  transform: scale(0.975);
+}
+
+.btn-open-archive:active::after {
+  inset: -9px;
+  opacity: 0;
+}
+
+.btn-open-archive:focus-visible {
+  outline: 2px solid #a7f3d0;
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .stage-section {
+    padding: 32px 0 !important;
+  }
+
+  .stage-header-block {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .stage-top-grid {
+    gap: 1rem !important;
+    margin-bottom: 1.35rem !important;
+  }
+
+  .stage-archive-row {
+    margin-top: 1rem !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .hero-section {
+    padding-top: 220px !important;
+  }
+
+  .stage-section {
+    scroll-margin-top: 220px;
+  }
+
+  .nav-container {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+
+  .nav-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    flex: 0 1 auto !important;
+    padding: 0.1rem 0 !important;
+  }
+
+  .theme-selector-dropdown,
+  .theme-selector-dropdown > .nav-btn,
+  .nav-actions > .nav-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .nav-btn {
+    justify-content: center !important;
+    gap: 0.2rem !important;
+    padding: 0.34rem 0.25rem !important;
+    font-size: 0.64rem !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-open-archive::before {
+    animation: none !important;
+  }
+
+  .btn-open-archive,
+  .btn-open-archive::after {
+    transition: none !important;
+  }
+}
+
 /* Compact, jade-and-gold cultivation profile */
 .rpg-card {
   padding: 22px 24px;

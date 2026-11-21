@@ -170,6 +170,7 @@
       initThemeSwitcher();
       renderStages();
       initCultivationBackground();
+      initXianxiaCanvas();
       initAchievements();
       initTimeCapsule();
       initTicketStation();
@@ -204,6 +205,222 @@
     updateJourneyProgress();
     window.addEventListener('scroll', updateJourneyProgress, { passive: true });
     window.addEventListener('resize', updateJourneyProgress, { passive: true });
+  }
+
+  function initXianxiaCanvas() {
+    const canvas = document.getElementById('xianxia-canvas');
+    if (!canvas || typeof canvas.getContext !== 'function') return;
+
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stars = Array.from({ length: 190 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      radius: Math.random() * 1.35 + 0.25,
+      phase: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.78 ? '#f5d98b' : Math.random() > 0.55 ? '#8de8d4' : '#e8f5f2'
+    }));
+    const motes = Array.from({ length: 38 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      speed: Math.random() * 0.018 + 0.006,
+      sway: Math.random() * 0.025 + 0.006,
+      phase: Math.random() * Math.PI * 2,
+      radius: Math.random() * 1.8 + 0.7,
+      jade: Math.random() > 0.5
+    }));
+    const leaves = Array.from({ length: 13 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      speed: Math.random() * 0.035 + 0.012,
+      sway: Math.random() * 0.035 + 0.01,
+      phase: Math.random() * Math.PI * 2,
+      size: Math.random() * 5 + 4
+    }));
+    const flyers = [
+      { period: 42, offset: 0.08, trail: [] },
+      { period: 57, offset: 0.58, trail: [] }
+    ];
+    let width = 0;
+    let height = 0;
+    let frameId = 0;
+    let meteor = null;
+    let nextMeteorAt = 6;
+    const startedAt = performance.now();
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      draw(reducedMotion ? 0 : (performance.now() - startedAt) / 1000);
+    };
+
+    const drawCultivator = (x, y, angle, scale) => {
+      context.save();
+      context.translate(x, y);
+      context.rotate(angle);
+      context.scale(scale, scale);
+      context.fillStyle = 'rgba(7, 18, 19, 0.82)';
+      context.strokeStyle = 'rgba(173, 235, 213, 0.64)';
+      context.lineWidth = 0.8;
+      context.beginPath();
+      context.moveTo(-2, -3);
+      context.quadraticCurveTo(-7, 1, -8, 8);
+      context.quadraticCurveTo(-3, 7, 0, 4);
+      context.quadraticCurveTo(5, 9, 9, 8);
+      context.quadraticCurveTo(7, 1, 2, -3);
+      context.closePath();
+      context.fill();
+      context.stroke();
+      context.beginPath();
+      context.arc(0, -6, 2.2, 0, Math.PI * 2);
+      context.fill();
+      context.beginPath();
+      context.moveTo(-2, -8);
+      context.quadraticCurveTo(0, -13, 5, -9);
+      context.stroke();
+      context.restore();
+    };
+
+    function draw(seconds) {
+      context.clearRect(0, 0, width, height);
+      context.save();
+      context.globalCompositeOperation = 'lighter';
+
+      stars.forEach(star => {
+        const opacity = 0.28 + (Math.sin(seconds * 1.3 + star.phase) + 1) * 0.3;
+        context.globalAlpha = opacity;
+        context.fillStyle = star.color;
+        context.beginPath();
+        context.arc(star.x * width, star.y * height * 0.78, star.radius, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      motes.forEach(mote => {
+        const progress = ((mote.y - seconds * mote.speed + 1) % 1 + 1) % 1;
+        const x = (mote.x + Math.sin(seconds * 0.55 + mote.phase) * mote.sway + 1) % 1;
+        const y = progress * height;
+        const glow = context.createRadialGradient(x * width, y, 0, x * width, y, mote.radius * 5);
+        glow.addColorStop(0, mote.jade ? 'rgba(111, 255, 207, 0.8)' : 'rgba(255, 213, 120, 0.8)');
+        glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        context.globalAlpha = 0.35 + (Math.sin(seconds * 2 + mote.phase) + 1) * 0.25;
+        context.fillStyle = glow;
+        context.beginPath();
+        context.arc(x * width, y, mote.radius * 5, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      flyers.forEach((flyer, index) => {
+        const progress = ((seconds / flyer.period + flyer.offset) % 1);
+        if (typeof flyer.lastProgress === 'number' && progress < flyer.lastProgress) {
+          flyer.trail.length = 0;
+        }
+        flyer.lastProgress = progress;
+        const x = width * (0.08 + progress * 0.84);
+        const y = height * (0.29 + Math.sin(progress * Math.PI * 2 + index) * 0.12);
+        const angle = Math.atan2(Math.cos(progress * Math.PI * 2 + index) * 0.12 * height, width * 0.84);
+        flyer.trail.push({ x, y });
+        if (flyer.trail.length > 22) flyer.trail.shift();
+
+        if (flyer.trail.length > 1) {
+          context.beginPath();
+          flyer.trail.forEach((point, pointIndex) => {
+            if (pointIndex === 0) context.moveTo(point.x, point.y);
+            else context.lineTo(point.x, point.y);
+          });
+          const trail = context.createLinearGradient(flyer.trail[0].x, flyer.trail[0].y, x, y);
+          trail.addColorStop(0, 'rgba(45, 212, 191, 0)');
+          trail.addColorStop(1, 'rgba(186, 255, 228, 0.55)');
+          context.globalAlpha = 0.55;
+          context.strokeStyle = trail;
+          context.lineWidth = index === 0 ? 2 : 1.2;
+          context.shadowBlur = 12;
+          context.shadowColor = '#55e6c1';
+          context.stroke();
+          context.shadowBlur = 0;
+        }
+
+        context.save();
+        context.translate(x, y);
+        context.rotate(angle);
+        context.globalAlpha = 0.82;
+        context.shadowBlur = 12;
+        context.shadowColor = '#86ffe0';
+        context.fillStyle = index === 0 ? '#d5fff1' : '#f6d88c';
+        context.beginPath();
+        context.moveTo(-15, 0);
+        context.lineTo(9, -1.6);
+        context.lineTo(17, 0);
+        context.lineTo(9, 1.6);
+        context.lineTo(-15, 0);
+        context.fill();
+        context.restore();
+        if (index === 0) drawCultivator(x - 1, y - 9, angle, 0.9);
+      });
+
+      leaves.forEach(leaf => {
+        const progress = (leaf.y + seconds * leaf.speed) % 1;
+        const x = (leaf.x + Math.sin(seconds * 0.4 + leaf.phase) * leaf.sway + 1) % 1;
+        const y = progress * height;
+        context.save();
+        context.translate(x * width, y);
+        context.rotate(Math.sin(seconds * 0.5 + leaf.phase) * 0.65 + 0.4);
+        context.globalAlpha = 0.38;
+        context.fillStyle = 'rgba(112, 190, 130, 0.8)';
+        context.beginPath();
+        context.ellipse(0, 0, leaf.size, leaf.size * 0.24, 0, 0, Math.PI * 2);
+        context.fill();
+        context.restore();
+      });
+
+      if (!reducedMotion && seconds > nextMeteorAt) {
+        meteor = { x: Math.random() * width * 0.7, y: Math.random() * height * 0.36, age: 0 };
+        nextMeteorAt = seconds + 7 + Math.random() * 10;
+      }
+      if (meteor) {
+        meteor.age += 1 / 60;
+        context.globalAlpha = Math.max(0, 1 - meteor.age / 0.8);
+        context.strokeStyle = 'rgba(224, 255, 241, 0.9)';
+        context.lineWidth = 1.5;
+        context.shadowBlur = 12;
+        context.shadowColor = '#a8ffe1';
+        context.beginPath();
+        context.moveTo(meteor.x + meteor.age * 180, meteor.y + meteor.age * 90);
+        context.lineTo(meteor.x + meteor.age * 180 - 48, meteor.y + meteor.age * 90 - 24);
+        context.stroke();
+        if (meteor.age >= 0.8) meteor = null;
+      }
+      context.restore();
+    }
+
+    const animate = now => {
+      draw((now - startedAt) / 1000);
+      frameId = window.requestAnimationFrame(animate);
+    };
+    const start = () => {
+      if (reducedMotion || document.hidden || frameId) return;
+      frameId = window.requestAnimationFrame(animate);
+    };
+    const stop = () => {
+      if (!frameId) return;
+      window.cancelAnimationFrame(frameId);
+      frameId = 0;
+    };
+
+    resize();
+    start();
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
   }
 
   // ========================================================
@@ -528,8 +745,14 @@
           <!-- Bottom CTA: View Full Stage Archive -->
           <div class="stage-archive-row">
             <button class="btn-open-archive" data-stage-id="${stage.id}">
-              <span class="archive-icon">🎞️</span>
-              <span>Xem toàn bộ kỷ niệm giai đoạn ${stage.period} (${stage.memories.length} khoảnh khắc)</span>
+              <span class="archive-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M7 5.5h15a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-15a3 3 0 0 1 3-3Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M8 9h13M8 13h13M8 17h13M8 21h8M22 4v23M25 8l3 2-3 2m0 7 3 2-3 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+                  <path d="M6 6.5 3.8 4.3m0 0v3m0-3h3" fill="none" stroke="#f8dfa0" stroke-linecap="round" stroke-width="1.2"/>
+                </svg>
+              </span>
+              <span>Khai Ấn Ngọc Giản: Ký Ức ${stage.period} (${stage.memories.length} mảnh tàn hồn)</span>
             </button>
           </div>
 
@@ -545,6 +768,7 @@
 
     // Attach Event Listeners to Memory Cards (Lightbox triggers)
     attachMemoryCardEvents();
+    attachArchiveButtons();
 
     document.querySelectorAll('.btn-toggle-stage-quotes').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -798,8 +1022,12 @@
   function attachArchiveButtons() {
     const archiveBtns = document.querySelectorAll('.btn-open-archive');
     archiveBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const stageId = btn.dataset.stageId;
+      btn.addEventListener('click', event => {
+        const archiveButton = event.target instanceof Element
+          ? event.target.closest('.btn-open-archive')
+          : null;
+        if (!archiveButton || archiveButton !== btn) return;
+        const stageId = archiveButton.dataset.stageId;
         openFilmstripModal(stageId);
       });
     });
