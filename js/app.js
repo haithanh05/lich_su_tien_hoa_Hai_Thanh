@@ -19,11 +19,13 @@
       playlist: [],
       currentIndex: 0,
       audio: new Audio(),
+      startTimeApplied: false,
       isPlaying: true,
       isUserMuted: false
     },
     lightbox: {
       images: [],
+      items: [],
       currentIndex: 0,
       memory: null,
       isZoomed: false
@@ -33,7 +35,10 @@
       questions: [],
       currentIndex: 0,
       score: 0,
-      hasAnswered: false
+      streak: 0,
+      hasAnswered: false,
+      lastCorrectLine: '',
+      lastWrongLine: ''
     },
     cinema: {
       slides: [],
@@ -55,40 +60,88 @@
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   }
 
-  // Helper: Generate Golden Stars SVG (supports half star 0.5)
+  function getCultivationLevelName(stage) {
+    const lv = String(stage.level || '').match(/Lv\.\d+/i)?.[0] || '';
+    const map = {
+      'luc-nho': 'Luyện Khí Tầng 2 – Tân Binh Hít Khí Trời',
+      '2021': 'Trúc Cơ Kỳ – Chiến Thần Cấp 3',
+      '2022': 'Kim Đan Kỳ – Chiến Thần Tái Hòa Nhập',
+      '2023': 'Nguyên Anh Kỳ – Tân Thủ Đồ Tu',
+      '2024': 'Hóa Thần Kỳ – Đạo Hữu Đi Làm',
+      '2025': 'Luyện Hư Kỳ – Trưởng Thành Tu 20',
+      '2026': 'Hợp Thể Kỳ – Kiến Trúc Sư Kiếm Tiền'
+    };
+    return `${lv} • ${map[stage.id] || 'Cảnh Giới Bí Ẩn'}`;
+  }
+
+  function getCultivationFate(stageId) {
+    const fates = {
+      'luc-nho': 'Mệnh cách Hồn Trẻ Xuyên Nhận – linh khí còn thơm sữa.',
+      '2021': 'Mệnh cách Cày Đêm Cấp Tốc – deadline tự động chạy theo.',
+      '2022': 'Mệnh cách Gió Trời Nhạy Bén – bắt trend chưa kịp cắt phông.',
+      '2023': 'Mệnh cách Trưởng Thành Chậm – mỗi bug là một kinh nghiệm.',
+      '2024': 'Mệnh cách Lạc Đường Không Sai – đi làm vẫn giữ linh tính.',
+      '2025': 'Mệnh cách Tu 20 Nghiêm Túc – ví tiền rung ít nhưng rung thật.',
+      '2026': 'Mệnh cách Kiếm Tốc Lập Code – deploy thẳng, nhân phẩm thẳng hơn.'
+    };
+    return fates[stageId] || 'Mệnh cách Ấn Linh – chờ trời mở cánh cửa.';
+  }
+
+  function applyStartTimeOnce(audio, startTime) {
+    if (!audio || !Number.isFinite(startTime) || startTime < 0) return;
+    if (audio.dataset.startTimeApplied === 'true') return;
+
+    const apply = () => {
+      if (audio.dataset.startTimeApplied === 'true') return;
+      if (audio.readyState >= 1) {
+        audio.currentTime = startTime;
+        audio.dataset.startTimeApplied = 'true';
+      }
+    };
+
+    if (audio.readyState >= 1) {
+      apply();
+    } else {
+      audio.addEventListener('loadedmetadata', apply, { once: true });
+    }
+  }
+
+  let linhThachIconId = 0;
+
+  // Helper: Render five cultivation crystals, including half tiers.
   function renderStars(rating) {
     const maxStars = 5;
-    const num = typeof rating === 'number' ? rating : parseFloat(rating) || 0;
-    let html = '<div class="star-rating-box" title="' + num + ' / 5 sao">';
+    const rawValue = typeof rating === 'number' ? rating : parseFloat(rating) || 0;
+    const num = Math.max(0, Math.min(maxStars, rawValue));
+    let html = `<div class="rpg-substat-flames" role="img" aria-label="Tầng ${num} trên ${maxStars}" title="${num} / ${maxStars} tầng">`;
 
     for (let i = 1; i <= maxStars; i++) {
-      if (num >= i) {
-        // Full star
-        html += `
-          <svg class="star-icon full" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-          </svg>`;
-      } else if (num >= i - 0.5) {
-        // Half star
-        html += `
-          <svg class="star-icon half" viewBox="0 0 24 24">
+      const state = num >= i ? 'active' : num >= i - 0.5 ? 'half' : 'inactive';
+      const gradientId = `linh-thach-${++linhThachIconId}`;
+      const fill = state === 'active'
+        ? `url(#${gradientId}-full)`
+        : state === 'half'
+          ? `url(#${gradientId}-half)`
+          : 'rgba(20, 32, 48, 0.9)';
+      html += `
+        <span class="rpg-crystal ${state}" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
             <defs>
-              <linearGradient id="half-star-${i}">
-                <stop offset="50%" stop-color="#fbbf24"/>
-                <stop offset="50%" stop-color="rgba(255, 255, 255, 0.15)"/>
+              <linearGradient id="${gradientId}-full" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#34d399"></stop>
+                <stop offset="100%" stop-color="#fbbf24"></stop>
+              </linearGradient>
+              <linearGradient id="${gradientId}-half" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="50%" stop-color="#34d399"></stop>
+                <stop offset="50%" stop-color="#16283a"></stop>
               </linearGradient>
             </defs>
-            <path fill="url(#half-star-${i})" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-          </svg>`;
-      } else {
-        // Empty star
-        html += `
-          <svg class="star-icon empty" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-          </svg>`;
-      }
+            <path d="M12 2.2 20.4 7v10L12 21.8 3.6 17V7z" fill="${fill}" stroke="${state === 'inactive' ? '#66808b' : '#fcd34d'}" stroke-width="1.25"></path>
+            <path d="m12 2.2-3.8 5.3L12 21.8l3.8-14.3zM3.6 7h16.8M3.6 17h16.8" fill="none" stroke="rgba(226, 252, 245, 0.62)" stroke-width="0.75"></path>
+          </svg>
+        </span>`;
     }
-    html += '</div>';
+    html += `<span class="rpg-substat-tier">Tầng ${num}/${maxStars}</span></div>`;
     return html;
   }
 
@@ -101,95 +154,148 @@
       return;
     }
 
-    state.data = window.MEMORIES_DATA;
+    try {
+      state.data = window.MEMORIES_DATA;
+      if (!Array.isArray(state.data.stages)) state.data.stages = [];
+      state.data.stages = state.data.stages.map(stage => ({
+        ...stage,
+        mainStats: Array.isArray(stage.mainStats) ? stage.mainStats : [],
+        subStats: Array.isArray(stage.subStats) ? stage.subStats : [],
+        memories: Array.isArray(stage.memories) ? stage.memories : [],
+        themeSong: stage.themeSong || { title: 'Giai điệu hoài niệm', src: '', startTime: 0 }
+      }));
 
-    initHeroSection();
-    initStickyNav();
-    initThemeSwitcher();
-    initAchievements();
-    renderStages();
-    updateFilterCounts();
-    initTimeCapsule();
-    initTicketStation();
-    initBackgroundMusic();
-    bindGlobalEvents();
+      initHeroSection();
+      initStickyNav();
+      initThemeSwitcher();
+      renderStages();
+      initCultivationBackground();
+      initAchievements();
+      initTimeCapsule();
+      initTicketStation();
+      initBackgroundMusic();
+      bindGlobalEvents();
+      initModalNavbarSync();
+      initUtilityPanels();
+    } catch (e) {
+      console.error('Không thể khởi tạo trang:', e);
+    }
+  }
+
+  function initCultivationBackground() {
+    const background = document.getElementById('cultivation-bg');
+    if (!background) return;
+
+    let updateScheduled = false;
+    const updateJourneyProgress = () => {
+      if (updateScheduled) return;
+      updateScheduled = true;
+      window.requestAnimationFrame(() => {
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollableHeight > 0
+          ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight))
+          : 0;
+        background.style.setProperty('--meridian-progress', `${progress * 100}%`);
+        background.classList.toggle('is-tribulation', progress >= 0.76);
+        updateScheduled = false;
+      });
+    };
+
+    updateJourneyProgress();
+    window.addEventListener('scroll', updateJourneyProgress, { passive: true });
+    window.addEventListener('resize', updateJourneyProgress, { passive: true });
   }
 
   // ========================================================
   // 2. HERO SECTION SETUP
   // ========================================================
-  function initHeroSection() {
-    const { siteInfo, stats, stages } = state.data;
+  function initModalNavbarSync() {
+    const modalSelectors = [
+      '#lightbox-modal.active',
+      '#filmstrip-modal.active',
+      '#game-modal.active',
+      '#cinema-modal.active'
+    ];
 
-    // Site Title & Intro
-    if (siteInfo.title.includes('Lịch Sử Tiến Hóa')) {
-      document.getElementById('hero-title').innerHTML = `Lịch Sử <span class="text-gradient">${siteInfo.title.replace('Lịch Sử ', '')}</span>`;
-    } else {
-      document.getElementById('hero-title').innerHTML = `Bảo Tàng <span class="text-gradient">${siteInfo.title.replace('Bảo Tàng ', '')}</span>`;
+    function syncModalNavbar() {
+      const hasOpenModal = modalSelectors.some(selector => document.querySelector(selector));
+      document.body.classList.toggle('modal-open', hasOpenModal);
+
+      const nav = document.getElementById('sticky-header');
+      const themeDropdown = document.getElementById('theme-selector-dropdown');
+      if (nav) nav.style.display = hasOpenModal ? 'none' : '';
+      if (themeDropdown) themeDropdown.style.display = hasOpenModal ? 'none' : '';
     }
-    document.getElementById('hero-intro').textContent = siteInfo.intro;
 
-    // Genesis Image & Texts
+    syncModalNavbar();
+
+    if ('MutationObserver' in window) {
+      const observer = new MutationObserver(syncModalNavbar);
+      observer.observe(document.body, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'aria-hidden']
+      });
+    }
+  }
+
+  function initHeroSection() {
+    const siteInfo = state.data?.siteInfo;
+    if (!siteInfo) return;
+
+    const heroTitle = document.getElementById('hero-title');
+    const heroIntro = document.getElementById('hero-intro');
+    if (heroTitle) {
+      if (String(siteInfo.title || '').includes('Lịch Sử Tiến Hóa')) {
+        heroTitle.innerHTML = `Lịch Sử <span class="text-gradient">${String(siteInfo.title).replace('Lịch Sử ', '')}</span>`;
+      } else {
+        heroTitle.innerHTML = `Bảo Tàng <span class="text-gradient">${String(siteInfo.title || '').replace('Bảo Tàng ', '')}</span>`;
+      }
+    }
+    if (heroIntro) heroIntro.textContent = siteInfo.intro || '';
+
     const genesisImg = document.getElementById('genesis-img');
-    genesisImg.src = siteInfo.heroImage;
-    genesisImg.alt = siteInfo.heroTitle;
-    document.getElementById('genesis-title').textContent = siteInfo.heroTitle;
-    document.getElementById('genesis-description').textContent = `"${siteInfo.heroDescription}"`;
+    if (genesisImg) {
+      genesisImg.src = siteInfo.heroImage || 'images/Lúc nhỏ/IMG_0025_Original.JPG';
+      genesisImg.alt = siteInfo.heroTitle || 'Ảnh khởi nguyên';
+    }
 
-    // 3D Flip Card Toggle
+    const genesisTitle = document.getElementById('genesis-title');
+    const genesisDescription = document.getElementById('genesis-description');
+    if (genesisTitle) genesisTitle.textContent = siteInfo.heroTitle || '';
+    if (genesisDescription) genesisDescription.textContent = `"${siteInfo.heroDescription || ''}"`;
+
     const genesisCard = document.getElementById('genesis-card');
     const btnFlipBack = document.getElementById('btn-flip-back');
     const btnOpenInfo = document.getElementById('btn-open-genesis-info');
 
-    genesisCard.addEventListener('click', function (e) {
-      if (e.target.id === 'btn-flip-back') return;
-      genesisCard.classList.toggle('flipped');
-    });
-
-    btnFlipBack.addEventListener('click', function (e) {
-      e.stopPropagation();
-      genesisCard.classList.remove('flipped');
-    });
-
-    btnOpenInfo.addEventListener('click', function () {
-      genesisCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setTimeout(() => {
-        genesisCard.classList.add('flipped');
-      }, 400);
-    });
-
-    // Keyboard accessibility for 3D flip card
-    genesisCard.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
+    if (genesisCard) {
+      genesisCard.addEventListener('click', function (e) {
+        if (e.target?.id === 'btn-flip-back') return;
         genesisCard.classList.toggle('flipped');
-      }
-    });
+      });
 
-    // Stats Bar
-    document.getElementById('stat-stages').textContent = stats.totalStages;
-    document.getElementById('stat-images').textContent = `${stats.totalImages}+`;
-    document.getElementById('stat-years').textContent = stats.yearSpan;
-    document.getElementById('stat-highlights').textContent = stats.totalHighlights;
+      genesisCard.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          genesisCard.classList.toggle('flipped');
+        }
+      });
+    }
 
-    // Chapter Select Chips in Hero
-    const chipsRow = document.getElementById('hero-chapter-chips');
-    chipsRow.innerHTML = '';
+    if (btnFlipBack && genesisCard) {
+      btnFlipBack.addEventListener('click', function (e) {
+        e.stopPropagation();
+        genesisCard.classList.remove('flipped');
+      });
+    }
 
-    stages.forEach(stage => {
-      const chip = document.createElement('a');
-      chip.className = 'hero-chip-card';
-      chip.href = `#stage-${stage.id}`;
-      
-      const levelShort = stage.level.split('-')[0].trim();
-
-      chip.innerHTML = `
-        <span class="hero-chip-period">${stage.period}</span>
-        <span class="hero-chip-title">${stage.title.replace('Giai đoạn ', '')}</span>
-        <span class="hero-chip-level">${levelShort}</span>
-      `;
-      chipsRow.appendChild(chip);
-    });
+    if (btnOpenInfo && genesisCard) {
+      btnOpenInfo.addEventListener('click', function () {
+        genesisCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => genesisCard.classList.add('flipped'), 400);
+      });
+    }
   }
 
   // ========================================================
@@ -197,6 +303,7 @@
   // ========================================================
   function initStickyNav() {
     const navBar = document.getElementById('nav-chapters-bar');
+    if (!navBar) return;
     navBar.innerHTML = '';
 
     state.data.stages.forEach(stage => {
@@ -213,10 +320,11 @@
     const navChips = navBar.querySelectorAll('.nav-chip');
 
     window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) return;
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      scrollLine.style.width = `${progress}%`;
+      if (scrollLine) scrollLine.style.width = `${progress}%`;
 
       // Determine active section
       const stageSections = document.querySelectorAll('.stage-section');
@@ -245,10 +353,18 @@
   // ========================================================
   function renderStages() {
     const container = document.getElementById('stages-container');
-    container.innerHTML = '';
+    if (!container) return;
+    try {
+      container.innerHTML = '';
 
-    state.data.stages.forEach((stage, index) => {
-      const section = document.createElement('section');
+      if (!state.data || !Array.isArray(state.data.stages) || state.data.stages.length === 0) {
+        console.warn('Không có dữ liệu giai đoạn để render.');
+        return;
+      }
+
+      state.data.stages.forEach((stage, index) => {
+        if (!stage) return;
+        const section = document.createElement('section');
       section.className = 'stage-section';
       section.id = `stage-${stage.id}`;
 
@@ -261,12 +377,6 @@
           <div class="stage-header-block">
             <span class="stage-index-tag">GIAI ĐOẠN ${stageNumber} / ${totalStages} &bull; ${stage.period}</span>
             <h2 class="stage-main-title">${stage.title}</h2>
-            <div class="stage-reel-btn-wrap">
-              <button class="btn-stage-reel" data-stage-id="${stage.id}" title="Phát phim kỷ niệm giai đoạn ${stage.period}">
-                <span class="reel-icon">▶</span>
-                <span>Phát phim giai đoạn này</span>
-              </button>
-            </div>
           </div>
 
           <!-- Stage RPG & Music Top Row -->
@@ -277,10 +387,12 @@
               <div class="rpg-header">
                 <div class="rpg-avatar">
                   <img src="${stage.coverImage}" alt="${stage.title}" loading="lazy" onerror="this.src='images/Lúc nhỏ/IMG_0025_Original.JPG';">
+                  <span class="rpg-avatar-lv">${String(stage.level || '').match(/Lv\.\d+/i)?.[0] || ''}</span>
                 </div>
                 <div class="rpg-title-group">
-                  <span class="rpg-badge-tag">HỒ SƠ NHÂN VẬT RPG</span>
-                  <h3 class="rpg-level-name">${stage.level}</h3>
+                  <span class="rpg-badge-tag">☯ BẢNG THUỘC TÍNH TU TIÊN • CẢNH GIỚI</span>
+                  <h3 class="rpg-level-name">${getCultivationLevelName(stage)}</h3>
+                  <div class="rpg-fate-badge">🔮 Mệnh Cách: ${getCultivationFate(stage.id)}</div>
                 </div>
               </div>
 
@@ -288,23 +400,32 @@
                 <!-- Primary Stats (Progress Bars) -->
                 <div class="rpg-stat-col">
                   <div class="rpg-stat-col-title">
-                    <span>⚡ Chỉ số chính</span>
+                    <span>❖ LINH CĂN &amp; CĂN CỐT CHÍNH</span>
                   </div>
                   <div class="stat-bar-group">
       `;
 
       // Main stats rendering
-      const barColors = ['fill-emerald', 'fill-cyan', 'fill-gold', 'fill-violet'];
-      stage.mainStats.forEach((stat, sIdx) => {
-        const colorClass = barColors[sIdx % barColors.length];
+      stage.mainStats.forEach(stat => {
+        const value = Math.max(0, Math.min(100, Number(stat.value) || 0));
+        const quality = value >= 90
+          ? { label: 'Cực Phẩm', className: 'cuc-pham' }
+          : value >= 80
+            ? { label: 'Thượng Phẩm', className: 'thuong-pham' }
+            : { label: 'Tiềm Năng', className: 'tiem-nang' };
         html += `
           <div class="stat-bar-item">
             <div class="stat-bar-labels">
               <span class="stat-bar-name">${stat.label}</span>
-              <span class="stat-bar-val">${stat.value}%</span>
+              <span class="stat-bar-value-group">
+                <span class="stat-bar-val">${stat.value}%</span>
+                <span class="rpg-mainstat-badge ${quality.className}">${quality.label}</span>
+              </span>
             </div>
-            <div class="stat-progress-track">
-              <div class="stat-progress-fill ${colorClass}" style="width: ${stat.value}%"></div>
+            <div class="rpg-mainstat-bar" role="img" aria-label="${stat.label}: ${stat.value}%">
+              <div class="rpg-mainstat-bar-inner" style="width: ${value}%">
+                <span class="rpg-mainstat-bar-dot" aria-hidden="true"></span>
+              </div>
             </div>
           </div>
         `;
@@ -317,15 +438,15 @@
                 <!-- Secondary Stats (Gold Stars) -->
                 <div class="rpg-stat-col">
                   <div class="rpg-stat-col-title">
-                    <span>⭐ Chỉ số phụ</span>
+                    <span>◈ THIÊN PHÚ &amp; HUYẾT MẠCH PHỤ</span>
                   </div>
-                  <div class="star-stat-group">
+                  <div class="rpg-substats-grid">
       `;
 
       stage.subStats.forEach(stat => {
         html += `
-          <div class="star-stat-item">
-            <span class="star-stat-name">${stat.label}</span>
+          <div class="rpg-substat-card">
+            <span class="rpg-substat-name">${stat.label}</span>
             ${renderStars(stat.value)}
           </div>
         `;
@@ -383,28 +504,26 @@
 
           </div>
 
-          <!-- Highlight Memories Section (Max 3-5 highlights) -->
-          <div class="stage-highlights-section">
-            <div class="highlights-title-row">
-              <h3 class="highlights-title">
-                <span>✨ Kỷ niệm điểm nhấn</span>
-              </h3>
-              <span class="highlights-desc">Các khoảnh khắc nổi bật &amp; tâm sự sâu lắng</span>
+          ${(() => {
+            const quotes = stage.memories.filter(m => (!m.image || m.image.length === 0) || m.tag === 'Tâm sự');
+            if (!quotes.length) return '';
+            return `
+          <div class="stage-quotes-toggle" data-stage-id="${stage.id}">
+            <button class="btn-toggle-stage-quotes" type="button" aria-expanded="false" aria-controls="stage-quotes-${stage.id}">
+              <span>✍️ Xem tâm sự</span>
+              <span class="quotes-count">${quotes.length} bài</span>
+            </button>
+            <div class="stage-quotes-content" id="stage-quotes-${stage.id}" hidden>
+              ${quotes.map(q => `
+                <article class="stage-quote-item">
+                  <span class="stage-quote-time">${q.time || ''}</span>
+                  <h4>${q.title || 'Tâm sự'}</h4>
+                  <p>“${q.description || ''}”</p>
+                </article>
+              `).join('')}
             </div>
-
-            <div class="highlights-grid" id="highlights-grid-${stage.id}">
-      `;
-
-      // Filter highlights (max 3-5 highlights)
-      const highlights = stage.memories.filter(m => m.isHighlight).slice(0, 5);
-
-      highlights.forEach(mem => {
-        html += renderMemoryCardHTML(mem);
-      });
-
-      html += `
-            </div>
-          </div>
+          </div>`;
+          })()}
 
           <!-- Bottom CTA: View Full Stage Archive -->
           <div class="stage-archive-row">
@@ -427,11 +546,21 @@
     // Attach Event Listeners to Memory Cards (Lightbox triggers)
     attachMemoryCardEvents();
 
-    // Attach Event Listeners to "View Full Stage Archive" buttons
-    attachArchiveButtons();
-
-    // Attach Event Listeners to Stage Reel buttons
-    attachStageReelButtons();
+    document.querySelectorAll('.btn-toggle-stage-quotes').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const contentId = btn.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+        if (!content) return;
+        const willOpen = content.hidden;
+        content.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        const label = btn.querySelector(':scope > span:first-child');
+        if (label) label.textContent = willOpen ? '✍️ Thu gọn tâm sự' : '✍️ Xem tâm sự';
+      });
+    });
+    } catch (e) {
+      console.error('Lỗi render 7 giai đoạn:', e);
+    }
   }
 
   // ========================================================
@@ -526,6 +655,10 @@
     const timeDur = document.getElementById(`time-dur-${stageId}`);
 
     if (!audio || !playBtn) return;
+
+    const stage = state.data?.stages?.find(item => item.id === stageId);
+    const stageStartTime = stage?.themeSong?.startTime;
+    applyStartTimeOnce(audio, stageStartTime);
 
     // Handle duration loaded
     audio.addEventListener('loadedmetadata', () => {
@@ -658,51 +791,6 @@
   // ========================================================
   // 8. GLOBAL FILTER (Tất cả | Khoảnh khắc | Tâm sự)
   // ========================================================
-  function updateFilterCounts() {
-    let totalAll = 0;
-    let totalPhotos = 0;
-    let totalQuotes = 0;
-
-    state.data.stages.forEach(st => {
-      const hl = st.memories.filter(m => m.isHighlight).slice(0, 5);
-      totalAll += hl.length;
-      totalPhotos += hl.filter(m => m.image && m.image.length > 0).length;
-      totalQuotes += hl.filter(m => !m.image || m.image.length === 0).length;
-    });
-
-    document.getElementById('filter-count-all').textContent = totalAll;
-    document.getElementById('filter-count-photos').textContent = totalPhotos;
-    document.getElementById('filter-count-quotes').textContent = totalQuotes;
-  }
-
-  function applyFilter(filterType) {
-    state.currentFilter = filterType;
-
-    // Update active tab buttons
-    const tabs = document.querySelectorAll('.filter-tab');
-    tabs.forEach(t => {
-      if (t.dataset.filter === filterType) {
-        t.classList.add('active');
-        t.setAttribute('aria-selected', 'true');
-      } else {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      }
-    });
-
-    // Show/hide cards
-    const allCards = document.querySelectorAll('.memory-card');
-    allCards.forEach(card => {
-      const cardType = card.dataset.type; // 'photo' or 'quote'
-      if (filterType === 'all') {
-        card.style.display = 'flex';
-      } else if (filterType === 'photos') {
-        card.style.display = cardType === 'photo' ? 'flex' : 'none';
-      } else if (filterType === 'quotes') {
-        card.style.display = cardType === 'quote' ? 'flex' : 'none';
-      }
-    });
-  }
 
   // ========================================================
   // 9. FILMSTRIP GRID MODAL (35mm Cuộn Phim Toàn Bộ Kỷ Niệm)
@@ -725,8 +813,10 @@
     state.currentModalMonth = 'all';
 
     const modal = document.getElementById('filmstrip-modal');
-    document.getElementById('modal-stage-title').textContent = stage.title;
-    document.getElementById('modal-stage-subtitle').textContent = `Kho lưu trữ gồm ${stage.memories.length} khoảnh khắc & tư liệu`;
+    const modalTitle = document.getElementById('modal-stage-title');
+    const modalSubtitle = document.getElementById('modal-stage-subtitle');
+    if (modalTitle) modalTitle.textContent = stage.title;
+    if (modalSubtitle) modalSubtitle.textContent = `Kho lưu trữ gồm ${stage.memories.length} khoảnh khắc & tư liệu`;
 
     // 1. Tự động tạm dừng các nhạc khác và phát nhạc chủ đề của giai đoạn (Nâng cấp 3)
     playStageAudio(stageId);
@@ -738,15 +828,19 @@
     renderFilmstripGrid(stage, 'all');
 
     // Show Modal
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
+    if (modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
     document.body.style.overflow = 'hidden';
   }
 
   function closeFilmstripModal() {
     const modal = document.getElementById('filmstrip-modal');
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
     document.body.style.overflow = '';
 
     // Tạm dừng nhạc giai đoạn và khôi phục nhạc nền nếu có
@@ -865,7 +959,7 @@
 
       frame.addEventListener('click', () => {
         if (mem.image && mem.image.length > 0) {
-          openLightbox(mem, 0);
+          openLightbox(mem, 0, state.currentStageForModal || null);
         }
       });
 
@@ -876,24 +970,42 @@
   // ========================================================
   // 10. LIGHTBOX VIEWER
   // ========================================================
-  function openLightbox(memory, startIndex) {
+  function openLightbox(memory, startIndex, stageForCollection = null) {
     if (!memory || !memory.image || memory.image.length === 0) return;
+    const stage = stageForCollection || state.data.stages.find(s => s.memories.some(m => m.id === memory.id)) || null;
 
-    state.lightbox.memory = memory;
-    state.lightbox.images = memory.image;
-    state.lightbox.currentIndex = startIndex || 0;
+    if (stage) {
+      const items = [];
+      stage.memories.forEach(mem => {
+        (mem.image || []).forEach(imgUrl => items.push({ memory: mem, imgUrl }));
+      });
+      state.lightbox.items = items;
+      state.lightbox.images = items.map(item => item.imgUrl);
+      const matchingIndex = items.findIndex(item => item.memory.id === memory.id && item.imgUrl === memory.image[startIndex || 0]);
+      state.lightbox.currentIndex = matchingIndex >= 0 ? matchingIndex : 0;
+    } else {
+      state.lightbox.items = memory.image.map(imgUrl => ({ memory, imgUrl }));
+      state.lightbox.images = memory.image;
+      state.lightbox.currentIndex = startIndex || 0;
+    }
+
+    state.lightbox.memory = state.lightbox.items[state.lightbox.currentIndex]?.memory || memory;
     state.lightbox.isZoomed = false;
 
     updateLightboxView();
 
     const modal = document.getElementById('lightbox-modal');
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
+    if (modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
     document.body.style.overflow = 'hidden';
   }
 
   function updateLightboxView() {
-    const { memory, images, currentIndex } = state.lightbox;
+    const { items, images, currentIndex } = state.lightbox;
+    const memory = items[currentIndex]?.memory || state.lightbox.memory;
+    state.lightbox.memory = memory;
     const currentImgUrl = images[currentIndex];
 
     const imgEl = document.getElementById('lightbox-img');
@@ -906,6 +1018,8 @@
     const prevBtn = document.getElementById('lightbox-btn-prev');
     const nextBtn = document.getElementById('lightbox-btn-next');
     const wrapper = document.getElementById('lightbox-img-wrapper');
+
+    if (!imgEl || !counterEl || !tagEl || !titleEl || !descEl || !timeEl || !thumbsContainer || !prevBtn || !nextBtn || !wrapper) return;
 
     // Reset zoom
     wrapper.classList.remove('zoomed');
@@ -944,8 +1058,10 @@
 
   function closeLightbox() {
     const modal = document.getElementById('lightbox-modal');
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
     // Only reset body overflow if filmstrip modal isn't also open
     const filmModal = document.getElementById('filmstrip-modal');
     if (!filmModal.classList.contains('active')) {
@@ -981,13 +1097,15 @@
 
   function buildGameImagePool() {
     const pool = [];
+    const seenImages = new Set();
     if (!state.data || !state.data.stages) return pool;
 
     state.data.stages.forEach(stage => {
       stage.memories.forEach(mem => {
         const imgs = mem.image || [];
         imgs.forEach(imgUrl => {
-          if (imgUrl && typeof imgUrl === 'string') {
+          if (imgUrl && typeof imgUrl === 'string' && !seenImages.has(imgUrl)) {
+            seenImages.add(imgUrl);
             pool.push({
               imageUrl: imgUrl,
               stageId: stage.id,
@@ -1018,6 +1136,7 @@
     state.game.questions = shuffledPool.slice(0, questionsCount);
     state.game.currentIndex = 0;
     state.game.score = 0;
+    state.game.streak = 0;
     state.game.hasAnswered = false;
 
     // Reset UI screens
@@ -1026,8 +1145,10 @@
 
     // Show Game Modal
     const modal = document.getElementById('game-modal');
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
+    if (modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
     document.body.style.overflow = 'hidden';
 
     // Render Question 0
@@ -1036,8 +1157,10 @@
 
   function closeGameModal() {
     const modal = document.getElementById('game-modal');
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
     const filmModal = document.getElementById('filmstrip-modal');
     const lightboxModal = document.getElementById('lightbox-modal');
     if (!filmModal.classList.contains('active') && !lightboxModal.classList.contains('active')) {
@@ -1052,107 +1175,174 @@
       return;
     }
 
+    const gameDialog = document.querySelector('.year-guess-dialog');
+    if (gameDialog) gameDialog.scrollTop = 0;
+
     state.game.hasAnswered = false;
     const currentQ = questions[index];
 
     // Update Status Bar
     document.getElementById('game-q-counter').textContent = `Câu ${index + 1} / ${questions.length}`;
-    document.getElementById('game-score-badge').textContent = `Điểm: ${state.game.score}`;
+    document.getElementById('game-score-badge').textContent = `Điểm: ${state.game.score} | Chuỗi: ${state.game.streak}🔥`;
     const progressPct = ((index + 1) / questions.length) * 100;
     document.getElementById('game-progress-fill').style.width = `${progressPct}%`;
 
     // Hide reveal card
     const revealCard = document.getElementById('game-reveal-card');
     revealCard.style.display = 'none';
+    revealCard.classList.remove('is-correct', 'is-wrong');
+    const revealHint = document.getElementById('reveal-hint');
+    if (revealHint) {
+      revealHint.hidden = true;
+      revealHint.textContent = '';
+    }
 
     // Set Image (Strictly no titles, dates, or stage hints)
     const imgEl = document.getElementById('game-current-img');
     imgEl.src = currentQ.imageUrl;
     imgEl.alt = 'Bức ảnh bí ẩn cần đoán năm';
 
-    // Generate 4 Options (1 correct + 3 distinct distractors from other stages)
-    const allStages = state.data.stages;
-    const correctStage = allStages.find(s => s.id === currentQ.stageId);
-    const otherStages = allStages.filter(s => s.id !== currentQ.stageId);
-    
-    function getGameStageLabel(st) {
-      if (st.id === 'luc-nho' || st.period.toLowerCase().includes('tuổi thơ')) {
-        return 'Lúc nhỏ (Tuổi thơ)';
-      }
-      return `Năm ${st.period}`;
+    const yearInput = document.getElementById('game-year-input');
+    const submitBtn = document.getElementById('game-year-submit');
+    if (yearInput) {
+      yearInput.value = '';
+      yearInput.disabled = false;
+      setTimeout(() => yearInput.focus(), 50);
+    }
+    if (submitBtn) submitBtn.disabled = false;
+
+    if (yearInput) {
+      yearInput.oninput = () => {
+        yearInput.value = yearInput.value.replace(/\D/g, '').slice(0, 4);
+      };
+      yearInput.onpaste = event => {
+        const pastedText = event.clipboardData?.getData('text');
+        if (typeof pastedText !== 'string') return;
+
+        event.preventDefault();
+        const start = yearInput.selectionStart ?? yearInput.value.length;
+        const end = yearInput.selectionEnd ?? start;
+        const pastedDigits = pastedText.replace(/[^0-9]/g, '');
+        yearInput.value = `${yearInput.value.slice(0, start)}${pastedDigits}${yearInput.value.slice(end)}`.slice(0, 4);
+        yearInput.dispatchEvent(new Event('input', { bubbles: true }));
+      };
+      yearInput.onkeydown = event => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          submitYearAnswer();
+        }
+      };
     }
 
-    const shuffledOthers = shuffleArray(otherStages).slice(0, 3);
-    
-    const options = [
-      { stageId: correctStage.id, label: getGameStageLabel(correctStage), isCorrect: true },
-      ...shuffledOthers.map(s => ({ stageId: s.id, label: getGameStageLabel(s), isCorrect: false }))
-    ];
+    if (submitBtn) {
+      submitBtn.onclick = submitYearAnswer;
+    }
 
-    const shuffledOptions = shuffleArray(options);
-
-    // Render Option Buttons
-    const optionsGrid = document.getElementById('game-options-grid');
-    optionsGrid.innerHTML = '';
-    const letters = ['A', 'B', 'C', 'D'];
-
-    shuffledOptions.forEach((opt, optIdx) => {
-      const btn = document.createElement('button');
-      btn.className = 'game-opt-btn';
-      btn.dataset.isCorrect = opt.isCorrect ? 'true' : 'false';
-      btn.dataset.stageId = opt.stageId;
-
-      btn.innerHTML = `
-        <span class="game-opt-prefix">${letters[optIdx]}</span>
-        <span class="game-opt-text">${opt.label}</span>
-      `;
-
-      btn.addEventListener('click', () => {
-        handleGameOptionSelect(btn, currentQ, opt.isCorrect);
-      });
-
-      optionsGrid.appendChild(btn);
-    });
+    function submitYearAnswer() {
+      if (!yearInput || state.game.hasAnswered) return;
+      const guessedYear = parseInt(yearInput.value.replace(/\D/g, ''), 10);
+      if (!Number.isFinite(guessedYear) || yearInput.value.length === 0) {
+        yearInput.focus();
+        yearInput.classList.remove('game-input-shake');
+        void yearInput.offsetWidth;
+        yearInput.classList.add('game-input-shake');
+        return;
+      }
+      handleGameYearAnswer(currentQ, guessedYear);
+    }
   }
 
-  function handleGameOptionSelect(selectedBtn, question, isCorrect) {
+  function handleGameYearAnswer(question, guessedYear) {
     if (state.game.hasAnswered) return;
     state.game.hasAnswered = true;
 
-    const optionsGrid = document.getElementById('game-options-grid');
-    const allBtns = optionsGrid.querySelectorAll('.game-opt-btn');
+    const yearInput = document.getElementById('game-year-input');
+    const submitBtn = document.getElementById('game-year-submit');
+    if (yearInput) yearInput.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
 
-    // Disable all option buttons
-    allBtns.forEach(btn => {
-      btn.classList.add('disabled');
-      btn.setAttribute('disabled', 'true');
-    });
+    const period = String(question.period || '');
+    const timeText = String(question.time || '');
+    const actualYearMatch = period.match(/\d{4}/) || timeText.match(/\d{4}/);
+    const actualYear = actualYearMatch ? parseInt(actualYearMatch[0], 10) : 2007;
+    const isCorrect = guessedYear === actualYear;
 
     const revealCard = document.getElementById('game-reveal-card');
     const statusIcon = document.getElementById('reveal-status-icon');
     const statusText = document.getElementById('reveal-status-text');
     const revealHeader = revealCard.querySelector('.reveal-header');
+    const revealHint = document.getElementById('reveal-hint');
+
+    const correctLines = [
+      'Đỉnh nóc kịch trần! Trí nhớ siêu việt như ổ cứng SSD NVMe!',
+      'Chuẩn không cần chỉnh! Bạn đích thị là nhà sử học cấp cao của Hải Thành!',
+      '10 điểm không có nhưng! Bộ não này vừa nâng cấp lên bản Pro Max!',
+      'Xử đẹp! Cỗ máy thời gian của bạn hoạt động ổn áp không lag!',
+      'Chính xác! Nhân phẩm câu hỏi hôm nay cộng trọn 100 điểm!',
+      'Trúng phóc! Trí nhớ này còn hơn cả bản lưu đám mây!',
+      'Tuyệt phẩm! Bạn vừa hồi sinh cột mốc trong bộ nhớ siêu tốc!',
+      'Chuẩn pro! Đáp án này xanh lá ngay từ lúc nhập!',
+      'Quá đỉnh! Bạn giống navigator phiên bản cộng hưởng ký ức!',
+      'Đúng luôn! Não bộ vừa mở khóa achievement “Bảo tàng sống”!',
+      'Bão à? Câu này rơi đúng vào skill điểm mạnh của bạn!',
+      'Chốt đơn thành công! Trí nhớ cấp SSS đã ra trận!',
+      'Không trượt phát nào! Bạn đang cày ký ức ở chế độ thần tốc!',
+      'Tạch? Không có! Bạn vừa buffet sạch cả dòng thời gian!',
+      'Đúng gắt gao! Cột mốc này phải cúi đầu gọi bạn là sư phụ!',
+      'Excellent! Tư liệu bảo tàng đã mở khóa full bản đồ!'
+    ];
+
+    const wrongLines = [
+      'Trật lất rồi! Đáp án này hơi lag so với dòng thời gian thực tế!',
+      'Suýt trúng... nếu bạn quay ngược cỗ máy thời gian của Doraemon!',
+      'Hệ thống phát hiện trí nhớ đang bảo trì, thử nhập lại phát nữa xem nào!',
+      'Ơ kìa, mốc thời gian này vừa dỗi nên đi lạc 1 vài năm!',
+      'Sai tí thôi nhưng cũng đủ để GPS ký ức chạy ngược đường!',
+      'Bạn đang ở nhánh timeline song song, quay lại phiên bản chính nào!',
+      'Đáp án chưa về! Ký ức vừa bị rơi gói gói dữ liệu!',
+      'Chưa chuẩn nha, não bộ đang loading vòng xoay hoài niệm!',
+      'Lag nhẹ từ server ký ức, nhưng lần sau chắc trúng!',
+      'Cái mốc này trốn trong game rồi, bạn đoán lệch cả quest!',
+      'Sai rồi ơi là sai, nhưng sai vui là thành công một nửa!',
+      'Bạn đang cúi tìm đáp án ở 1 năm khác trong album ảnh đấy!',
+      'Lệch timeline! Hãy để bản đồ ký ức dẫn đường lại nhé!',
+      'Phát hiện gacha ký ức trật rare, làm thêm lượt nữa là lên!',
+      'Năm nhập vào đang ở trạng thái AFK, đáp án lại muốn khác!',
+      'Sai một ly, đi một năm... trật một ly là lệch cả bức ảnh!'
+    ];
 
     if (isCorrect) {
       state.game.score += 1;
-      selectedBtn.classList.add('correct');
-      document.getElementById('game-score-badge').textContent = `Điểm: ${state.game.score}`;
-
+      state.game.streak += 1;
+      revealCard.classList.add('is-correct');
       revealHeader.className = 'reveal-header is-correct';
       statusIcon.textContent = '🎉';
-      statusText.textContent = 'CHÍNH XÁC!';
+      let line;
+      do { line = correctLines[Math.floor(Math.random() * correctLines.length)]; } while (line === state.game.lastCorrectLine);
+      state.game.lastCorrectLine = line;
+      statusText.textContent = line;
+      if (revealHint) {
+        revealHint.hidden = true;
+        revealHint.textContent = '';
+      }
     } else {
-      selectedBtn.classList.add('wrong');
-      allBtns.forEach(btn => {
-        if (btn.dataset.isCorrect === 'true') {
-          btn.classList.add('correct');
-        }
-      });
-
+      state.game.streak = 0;
+      revealCard.classList.add('is-wrong');
+      let line;
+      do { line = wrongLines[Math.floor(Math.random() * wrongLines.length)]; } while (line === state.game.lastWrongLine);
+      state.game.lastWrongLine = line;
+      const hint = guessedYear < actualYear
+        ? `💡 Gợi ý: Năm thực tế LỚN HƠN ${guessedYear}`
+        : `💡 Gợi ý: Năm thực tế NHỎ HƠN ${guessedYear}`;
       revealHeader.className = 'reveal-header is-wrong';
       statusIcon.textContent = '😅';
-      statusText.textContent = 'TIẾC QUÁ, CHƯA CHUẨN RỒI!';
+      statusText.textContent = line;
+      if (revealHint) {
+        revealHint.textContent = hint;
+        revealHint.hidden = false;
+      }
     }
+    document.getElementById('game-score-badge').textContent = `Điểm: ${state.game.score} | Chuỗi: ${state.game.streak}🔥`;
 
     // Populate Reveal Memory Details
     document.getElementById('reveal-memory-title').textContent = question.title;
@@ -1168,6 +1358,16 @@
 
     // Show Reveal Card
     revealCard.style.display = 'flex';
+    const modalContainer = document.querySelector('.year-guess-dialog');
+    if (modalContainer) {
+      requestAnimationFrame(() => {
+        modalContainer.scrollTo({
+          top: modalContainer.scrollHeight,
+          behavior: 'smooth'
+        });
+        revealCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
   }
 
   function showGameResult() {
@@ -1208,16 +1408,6 @@
     document.getElementById('result-trophy-icon').textContent = trophy;
     document.getElementById('result-rank-badge').textContent = rank;
     document.getElementById('result-commentary').textContent = commentary;
-  }
-
-  function attachStageReelButtons() {
-    const stageReelBtns = document.querySelectorAll('.btn-stage-reel');
-    stageReelBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        startCinemaReel(btn.dataset.stageId);
-      });
-    });
   }
 
   // ========================================================
@@ -1324,8 +1514,10 @@
 
     // 5. Open Cinema Modal
     const modal = document.getElementById('cinema-modal');
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
+    if (modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
     document.body.style.overflow = 'hidden';
 
     // 6. Reset Controls UI
@@ -1398,6 +1590,8 @@
         cinemaAudio.src = encodeURI(slide.themeSong.src);
         state.cinema.currentTrackSrc = slide.themeSong.src;
         cinemaAudio.muted = state.cinema.isMuted;
+        cinemaAudio.dataset.startTimeApplied = 'false';
+        applyStartTimeOnce(cinemaAudio, slide.themeSong.startTime);
         if (state.cinema.isPlaying) {
           cinemaAudio.play().catch(e => console.warn('Cinema audio play error:', e));
         }
@@ -1477,8 +1671,10 @@
     }
 
     const modal = document.getElementById('cinema-modal');
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
 
     const filmModal = document.getElementById('filmstrip-modal');
     const lightboxModal = document.getElementById('lightbox-modal');
@@ -1496,24 +1692,89 @@
   // ========================================================
   // 13. GLOBAL EVENTS BINDING
   // ========================================================
-  function bindGlobalEvents() {
-    // Filter Tabs Click
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    filterTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        applyFilter(tab.dataset.filter);
+  function initUtilityPanels() {
+    const sections = {
+      'rpg-achievements': document.getElementById('rpg-achievements'),
+      'time-capsule': document.getElementById('time-capsule'),
+      'ticket-station': document.getElementById('ticket-station')
+    };
+
+    function closeUtility(targetId) {
+      const section = sections[targetId];
+      const button = document.querySelector(`[data-utility-target="${targetId}"]`);
+      if (section) {
+        section.hidden = true;
+        section.classList.remove('open');
+      }
+      if (button) button.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleUtility(targetId, shouldOpen = null) {
+      const section = sections[targetId];
+      if (!section) return;
+      const isOpen = shouldOpen !== null ? shouldOpen : section.hidden;
+
+      if (isOpen) {
+        Object.keys(sections).forEach(id => {
+          if (id !== targetId) closeUtility(id);
+        });
+        section.hidden = false;
+        section.classList.add('open');
+        const button = document.querySelector(`[data-utility-target="${targetId}"]`);
+        if (button) button.setAttribute('aria-expanded', 'true');
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        closeUtility(targetId);
+      }
+    }
+
+    document.querySelectorAll('.utility-launch-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.utilityTarget;
+        toggleUtility(targetId, sections[targetId]?.hidden);
       });
     });
 
+    document.querySelectorAll('.utility-section').forEach(section => {
+      const closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'utility-close-btn';
+      closeBtn.setAttribute('aria-label', 'Thu gọn khu vực');
+      closeBtn.textContent = '✕ Thu gọn';
+      closeBtn.addEventListener('click', () => closeUtility(section.id));
+      section.appendChild(closeBtn);
+    });
+
+    const navTicketBtn = document.getElementById('nav-ticket-btn');
+    if (navTicketBtn) {
+      navTicketBtn.addEventListener('click', () => toggleUtility('ticket-station', true));
+    }
+
+    const heroTicketBtn = document.getElementById('btn-hero-ticket');
+    if (heroTicketBtn) {
+      heroTicketBtn.addEventListener('click', e => {
+        e.preventDefault();
+        toggleUtility('ticket-station', true);
+      });
+    }
+  }
+
+  function bindGlobalEvents() {
     // Close Filmstrip Modal Events
-    document.getElementById('btn-close-filmstrip').addEventListener('click', closeFilmstripModal);
-    document.getElementById('modal-filmstrip-backdrop').addEventListener('click', closeFilmstripModal);
+    const btnCloseFilmstrip = document.getElementById('btn-close-filmstrip');
+    const modalFilmstripBackdrop = document.getElementById('modal-filmstrip-backdrop');
+    if (btnCloseFilmstrip) btnCloseFilmstrip.addEventListener('click', closeFilmstripModal);
+    if (modalFilmstripBackdrop) modalFilmstripBackdrop.addEventListener('click', closeFilmstripModal);
 
     // Lightbox Controls Events
-    document.getElementById('lightbox-btn-close').addEventListener('click', closeLightbox);
-    document.getElementById('lightbox-backdrop').addEventListener('click', closeLightbox);
-    document.getElementById('lightbox-btn-prev').addEventListener('click', prevLightboxImage);
-    document.getElementById('lightbox-btn-next').addEventListener('click', nextLightboxImage);
+    const btnLightboxClose = document.getElementById('lightbox-btn-close');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const btnLightboxPrev = document.getElementById('lightbox-btn-prev');
+    const btnLightboxNext = document.getElementById('lightbox-btn-next');
+    if (btnLightboxClose) btnLightboxClose.addEventListener('click', closeLightbox);
+    if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+    if (btnLightboxPrev) btnLightboxPrev.addEventListener('click', prevLightboxImage);
+    if (btnLightboxNext) btnLightboxNext.addEventListener('click', nextLightboxImage);
 
     // Zoom Toggle in Lightbox
     const zoomBtn = document.getElementById('lightbox-btn-zoom');
@@ -1645,14 +1906,16 @@
     let touchEndX = 0;
     const lightboxStage = document.querySelector('.lightbox-stage');
 
-    lightboxStage.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    if (lightboxStage) {
+      lightboxStage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0]?.screenX || 0;
+      }, { passive: true });
 
-    lightboxStage.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
+      lightboxStage.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0]?.screenX || 0;
+        handleSwipe();
+      }, { passive: true });
+    }
 
     function handleSwipe() {
       const diff = touchEndX - touchStartX;
@@ -1927,7 +2190,8 @@
     const BG_TRACKS = [
       {
         src: encodeURI('audio/nhạc nền/YTDown.com_YouTube_Media_-yHCeSZ-Nik_Multifandom-Dancin_009_128k.mp3'),
-        title: 'Dancin – Multifandom'
+        title: 'Dancin – Multifandom',
+        startTime: 15
       },
       {
         src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_a-q4IO-plBo_Tinh-Vệ-精卫-Kasber-Remix-Nhạc-Trung-Tu-Tiên-Remix-Suy_009_vbr.mp3'),
@@ -1935,19 +2199,23 @@
       },
       {
         src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_GrAchTdepsU_24kGoldn-Mood-Official-Video-ft-iann-dior_009_vbr.mp3'),
-        title: 'Mood – 24kGoldn ft. iann dior'
+        title: 'Mood – 24kGoldn ft. iann dior',
+        startTime: 6
       },
       {
         src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_JGwWNGJdvx8_Ed-Sheeran-Shape-of-You-Official-Music-Video_011_vbr.mp3'),
-        title: 'Shape of You – Ed Sheeran'
+        title: 'Shape of You – Ed Sheeran',
+        startTime: 5
       },
       {
         src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_kqFLQG484pg_Lukas-Graham-7-Years_009_vbr.mp3'),
-        title: '7 Years – Lukas Graham'
+        title: '7 Years – Lukas Graham',
+        startTime: 15
       },
       {
         src: encodeURI('audio/nhạc nền/YTSave.to_YouTube_Media_VmdfTTJ3NaA_Passenger-let-her-go-lyrics_009_vbr.mp3'),
-        title: 'Let Her Go – Passenger'
+        title: 'Let Her Go – Passenger',
+        startTime: 26
       }
     ];
 
@@ -2041,7 +2309,10 @@
     if (!state.bgMusic.playlist || state.bgMusic.playlist.length === 0) return;
     state.bgMusic.currentIndex = index % state.bgMusic.playlist.length;
     const track = state.bgMusic.playlist[state.bgMusic.currentIndex];
+    state.bgMusic.startTimeApplied = false;
+    state.bgMusic.audio.dataset.startTimeApplied = 'false';
     state.bgMusic.audio.src = track.src;
+    applyStartTimeOnce(state.bgMusic.audio, track.startTime);
 
     const titleEl = document.getElementById('bg-music-current-title');
     if (titleEl) {
@@ -2145,6 +2416,7 @@
     if (!dropdown || !toggleBtn) return;
 
     const themeIcons = {
+      xianxia: '☯',
       obsidian: '🌑',
       sepia: '📜',
       midnight: '🌌',
@@ -2152,6 +2424,7 @@
     };
 
     const themeNames = {
+      xianxia: 'Tiên Giới Cổ Phong',
       obsidian: 'Đêm Obsidian',
       sepia: 'Giấy Cũ',
       midnight: 'Xanh Đêm',
@@ -2159,7 +2432,7 @@
     };
 
     function applyTheme(theme, save = true) {
-      if (!themeIcons[theme]) theme = 'obsidian';
+      if (!themeIcons[theme]) theme = 'xianxia';
       document.documentElement.setAttribute('data-theme', theme);
 
       optionBtns.forEach(btn => {
@@ -2180,8 +2453,8 @@
       }
     }
 
-    // Load saved theme or default to midnight
-    let initialTheme = 'midnight';
+    // Load saved theme or default to Xianxia.
+    let initialTheme = 'xianxia';
     try {
       const saved = localStorage.getItem('museum_theme_v22');
       if (saved && themeIcons[saved]) {

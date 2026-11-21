@@ -21,36 +21,41 @@ window.MEMORIES_DATA = {
       "level": "Lv.02 - Tân binh khám phá thế giới",
       "mainStats": [
         {
-          "label": "Hồn nhiên",
-          "value": 100
-        },
-        {
-          "label": "Tò mò",
+          "label": "Tiên Thiên Khóc Nhè",
           "value": 95
         },
         {
-          "label": "Vâng lời",
-          "value": 50
+          "label": "Hấp Thụ Sữa Bột",
+          "value": 90
+        },
+        {
+          "label": "Tốc Độ Lật Người & Bò",
+          "value": 85
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
-          "value": 1
+          "label": "Thần Thông Ngủ Ngày",
+          "value": 5
         },
         {
-          "label": "Tốc độ",
-          "value": 1
+          "label": "Kháng Hiệu Ứng Đòn Roi",
+          "value": 3.5
         },
         {
-          "label": "Máu chiến",
+          "label": "Nhân Phẩm Nhận Lì Xì",
+          "value": 4.5
+        },
+        {
+          "label": "Độ Tò Mò Vạn Vật",
           "value": 5
         }
       ],
       "coverImage": "images/Lúc nhỏ/IMG_0025_Original.JPG",
       "themeSong": {
         "title": "Nơi Ấy Con Tìm Về - Hồ Quang Hiếu",
-        "src": "audio/YTSave.to_YouTube_Media_uvIgpYPAcaQ_Nơi-Ấy-Con-Tìm-Về-Hồ-Quang-Hiếu-Official-MV_009_vbr.mp3"
+        "src": "audio/YTSave.to_YouTube_Media_uvIgpYPAcaQ_Nơi-Ấy-Con-Tìm-Về-Hồ-Quang-Hiếu-Official-MV_009_vbr.mp3",
+        "startTime": 22
       },
       "memories": [
         {
@@ -202,30 +207,34 @@ window.MEMORIES_DATA = {
       "level": "Lv.16 - Tân binh cấp 3 đầy nhiệt huyết",
       "mainStats": [
         {
-          "label": "Khả năng thức khuya",
+          "label": "Thích Nghi Môi Trường Mới",
           "value": 90
         },
         {
-          "label": "Trải nghiệm",
+          "label": "Năng Lượng Khám Phá",
           "value": 60
         },
         {
-          "label": "Kỷ luật",
+          "label": "Tốc Độ Bắt Nhịp",
           "value": 55
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Khả Năng Thức Khuya",
           "value": 2
         },
         {
-          "label": "Tốc độ",
+          "label": "Nhân Phẩm Quay Gacha",
           "value": 2.5
         },
         {
-          "label": "Máu chiến",
+          "label": "Tốc Độ Né Câu Hỏi Người Lớn",
           "value": 4
+        },
+        {
+          "label": "Phản Xạ Né Bài Kiểm Tra Miệng",
+          "value": 3
         }
       ],
       "coverImage": "images/2021/ADA80A3E-B242-4935-81F3-51BB0EC1115A_Original.JPG",
@@ -749,30 +758,34 @@ window.MEMORIES_DATA = {
       "level": "Lv.17 - Chiến thần tái hòa nhập cộng đồng",
       "mainStats": [
         {
-          "label": "Năng lượng đi chơi",
+          "label": "Linh Căn Nhiệt Huyết",
           "value": 90
         },
         {
-          "label": "Bắt trend",
+          "label": "Độ Lì Trước Áp Lực",
           "value": 85
         },
         {
-          "label": "Quậy phá",
+          "label": "Tư Duy Phản Biện",
           "value": 60
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Hỏa Hầu Chạy Deadline",
           "value": 2.5
         },
         {
-          "label": "Tốc độ",
+          "label": "Tỷ Lệ Sống Sót Mùa Thi",
           "value": 3
         },
         {
-          "label": "Độ lầy lội",
+          "label": "Kháng Hiệu Ứng Buồn Ngủ",
           "value": 5
+        },
+        {
+          "label": "Kháng Cú Sốc Điểm Thi",
+          "value": 3.5
         }
       ],
       "coverImage": "images/2022/FB_IMG_1664453443312_Original_Original.JPG",
@@ -1589,36 +1602,41 @@ window.MEMORIES_DATA = {
       "level": "Lv.18 - Tân thủ chính thức mở khóa bản đồ 18+",
       "mainStats": [
         {
-          "label": "Sức bền cày đêm",
+          "label": "Căn Cốt Tự Lập",
           "value": 95
         },
         {
-          "label": "Trưởng thành",
+          "label": "Bản Lĩnh Vượt Bão",
           "value": 80
         },
         {
-          "label": "Tâm lý vững vàng",
+          "label": "Độ Tĩnh Tâm",
           "value": 75
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Thần Thông Tiết Kiệm Cuối Tháng",
           "value": 2.5
         },
         {
-          "label": "Tốc độ",
+          "label": "Trực Giác Bắt Bug",
           "value": 3.5
         },
         {
-          "label": "Độ liều lĩnh",
+          "label": "Tốc Độ Dịch Chuyển Giờ Chót",
           "value": 4.5
+        },
+        {
+          "label": "Thần Thông Săn Cơm Cuối Tháng",
+          "value": 4
         }
       ],
       "coverImage": "images/2023/IMG_1889_Original_Original.JPG",
       "themeSong": {
         "title": "Justin Bieber - Peaches ft. Daniel Caesar, Giveon",
-        "src": "audio/YTSave.to_YouTube_Media_kGcoKuK08-c_Justin-Bieber-Peaches-ft-Daniel-Caesar-Giveon_009_vbr.mp3"
+        "src": "audio/YTSave.to_YouTube_Media_kGcoKuK08-c_Justin-Bieber-Peaches-ft-Daniel-Caesar-Giveon_009_vbr.mp3",
+        "startTime": 9
       },
       "memories": [
         {
@@ -1987,30 +2005,34 @@ window.MEMORIES_DATA = {
       "level": "Lv.19 - Tân binh trường đời chính thức nhập cuộc",
       "mainStats": [
         {
-          "label": "Sức bền đi làm",
+          "label": "Tư Duy Lập Trình",
           "value": 90
         },
         {
-          "label": "Tự lập",
+          "label": "Sức Bền Cày Đêm",
           "value": 85
         },
         {
-          "label": "Chịu áp lực",
+          "label": "Tâm Cảnh Vững Vàng",
           "value": 80
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Kháng Độc Lỗi Đỏ Console",
           "value": 3
         },
         {
-          "label": "Tốc độ thích nghi",
+          "label": "Nhãn Lực Soi Dấu Chấm Phẩy",
           "value": 4
         },
         {
-          "label": "Độ lì đòn",
+          "label": "Hấp Thụ Caffeine Thành Linh Lực",
           "value": 4.5
+        },
+        {
+          "label": "Kỹ Năng Chốt Bug Trước Giờ Giao",
+          "value": 4
         }
       ],
       "coverImage": "images/2024/IMG_4130_Original.JPG",
@@ -2521,30 +2543,34 @@ window.MEMORIES_DATA = {
       "level": "Lv.20 - Tân thủ đầu 2 chính thức mở khóa chương mới",
       "mainStats": [
         {
-          "label": "Bản lĩnh tuổi 20",
+          "label": "Ngộ Tính Công Nghệ",
           "value": 90
         },
         {
-          "label": "Tư duy thực tế",
+          "label": "Kỷ Luật Thép",
           "value": 85
         },
         {
-          "label": "Năng lượng học hỏi",
+          "label": "Nội Lực Tích Lũy",
           "value": 92
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Triệu Hồi AI Hỗ Trợ",
           "value": 3.5
         },
         {
-          "label": "Tốc độ",
+          "label": "Đao Pháp Cắt Bỏ Lười Biếng",
           "value": 4.5
         },
         {
-          "label": "Độ quyết đoán",
+          "label": "Tâm Pháp Giữ Bình Tĩnh",
           "value": 4.5
+        },
+        {
+          "label": "Khả Năng Tự Chữa Lỗi Môi Trường",
+          "value": 4
         }
       ],
       "coverImage": "images/2025/IMG_7058_Original.JPG",
@@ -3021,36 +3047,41 @@ window.MEMORIES_DATA = {
       "level": "Lv.21 - Kiến trúc sư của những dòng code & phiên bản mới",
       "mainStats": [
         {
-          "label": "Tư duy logic",
+          "label": "Cảnh Giới Thực Chiến",
           "value": 92
         },
         {
-          "label": "Kỷ luật bản thân",
+          "label": "Thể Phách & Kỷ Luật",
           "value": 88
         },
         {
-          "label": "Sức bền cày dự án",
+          "label": "Tầm Nhìn Tương Lai",
           "value": 95
         }
       ],
       "subStats": [
         {
-          "label": "Sức mạnh",
+          "label": "Vận Hành Đa Nhiệm",
           "value": 4
         },
         {
-          "label": "Tốc độ gõ phím",
+          "label": "Thần Công Nấu Ăn Sinh Tồn",
           "value": 4.5
         },
         {
-          "label": "Độ tập trung",
+          "label": "Khí Chất Chiến Thần",
           "value": 5
+        },
+        {
+          "label": "Độ Bền Deploy Lúc Rạng Sáng",
+          "value": 4.5
         }
       ],
       "coverImage": "images/2026/temp_image_63D0DC77-C774-4F3F-9B6B-703DBE04FF7C.JPG",
       "themeSong": {
         "title": "Charlie Puth - We Don't Talk Anymore",
-        "src": "audio/YTSave.to_YouTube_Media_3AtDnEC4zak_Charlie-Puth-We-Don-t-Talk-Anymore-feat-Selena-Gomez-Official-Video_009_vbr.mp3"
+        "src": "audio/YTSave.to_YouTube_Media_3AtDnEC4zak_Charlie-Puth-We-Don-t-Talk-Anymore-feat-Selena-Gomez-Official-Video_009_vbr.mp3",
+        "startTime": 3.5
       },
       "memories": [
         {
